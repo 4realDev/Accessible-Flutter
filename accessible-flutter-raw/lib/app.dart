@@ -18,10 +18,7 @@ class CupertinoStoreApp extends StatelessWidget {
     // CupertinoApp from cupertino.dart package as wrapper for the app
     return CupertinoApp(
       // CupertinoStoreHomePage as first loaded screen
-      home: Semantics(
-          label: "Hello Yellow Mellow Baby",
-          child: CupertinoStoreHomePage()
-      ),
+      home: CupertinoStoreHomePage()
     );
   }
 }
