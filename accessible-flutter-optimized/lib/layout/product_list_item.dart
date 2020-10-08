@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
 
@@ -51,7 +52,12 @@ class ProductRowItem extends StatelessWidget {
         onTap: () {
           final model = Provider.of<AppStateModel>(context, listen: false);
           model.addProductToCart(product.id);
+          displayDialog(context);
         },
+
+        /*onTap: () {
+          displayDialog(context);
+        },*/
 
         // onTapHint completes the "Double tap to" sentence with the given string
         onTapHint: "add to cart",
@@ -149,5 +155,29 @@ class ProductRowItem extends StatelessWidget {
       ],
     );
 
+  }
+
+  void displayDialog(BuildContext context) {
+    showCupertinoDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) => new Semantics(
+        //onDidGainAccessibilityFocus: ?,
+        //?? onSetSelection ??
+        onDidGainAccessibilityFocus: () { debugPrint('All right, do not do that again though.'); },
+        child: CupertinoAlertDialog(
+          title: new Text("Item added to cart"),
+          insetAnimationDuration: const Duration(milliseconds: 100),
+          actions: <Widget>[
+            new CupertinoDialogAction(
+                child: const Text('Discard'),
+                isDestructiveAction: true,
+                isDefaultAction: true,
+                onPressed: () { Navigator.pop(context, 'Discard'); }
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
