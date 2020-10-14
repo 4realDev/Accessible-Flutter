@@ -1,3 +1,4 @@
+import 'package:cupertino_store/language_adapted_strings.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -52,7 +53,6 @@ class ProductRowItem extends StatelessWidget {
         onTap: () {
           final model = Provider.of<AppStateModel>(context, listen: false);
           model.addProductToCart(product.id);
-          displayDialog(context);
         },
 
         /*onTap: () {
@@ -60,12 +60,12 @@ class ProductRowItem extends StatelessWidget {
         },*/
 
         // onTapHint completes the "Double tap to" sentence with the given string
-        onTapHint: "add to cart",
+        onTapHint: LanguageAdaptedStrings.productItemHint/*"add to cart"*/,
 
         child: Row(
           children: <Widget>[
 
-            /*** #region IMAGE ***/
+            /*** IMAGE ***/
             // to ensure that screen-readers are not reading "Image"
             ExcludeSemantics(
               child: ClipRRect(

@@ -5,11 +5,17 @@ import 'package:cupertino_store/shopping_cart_tab.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 
+import 'language_adapted_strings.dart';
+
 // launched by runApp
 // launches the CupertinoStoreHomePage
 class CupertinoStoreApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+
+    // BUILD LANGUAGE ADAPTED STRINGS
+    LanguageAdaptedStrings.setLanguageAdaptedString();
+
     // This app is designed only to work vertically, so we limit
     // orientations to portrait up and down.
     SystemChrome.setPreferredOrientations(
