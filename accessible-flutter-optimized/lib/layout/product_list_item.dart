@@ -50,9 +50,17 @@ class ProductRowItem extends StatelessWidget {
       // Screen-Reading: "Product name. Product price. Double tap to add to cart."
 
       child: Semantics(
+
+        /*
+        SemanticsService announcement is only necessary in the Semantic wrapper.
+        If the semantics wrapper is tapped, the announcement occurs and the user gets haptic feedback,
+        that symbolizes, that the item is successful added to the cart
+         */
+
         onTap: () {
           final model = Provider.of<AppStateModel>(context, listen: false);
           model.addProductToCart(product.id);
+          SemanticsService.announce("${product.name} added to cart", TextDirection.ltr);
         },
 
         /*onTap: () {
@@ -117,6 +125,7 @@ class ProductRowItem extends StatelessWidget {
                 onPressed: () {
                   final model = Provider.of<AppStateModel>(context, listen: false);
                   model.addProductToCart(product.id);
+                  SemanticsService.announce("${product.name} added to cart", TextDirection.ltr);
                 },
 
                 /*** ICON ***/
