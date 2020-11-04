@@ -181,3 +181,57 @@ class ProductRowItem extends StatelessWidget {
     );
   }
 }
+
+
+
+/*
+child: Semantics(
+  onTap: () {
+    model.addProductToCart(product.id);
+  },
+
+  // onTapHint completes the "Double tap to" sentence with the given string
+  onTapHint: LanguageAdaptedStrings.productItemHint/*"add to cart"*/,
+
+  child: Row(
+    children: <Widget>[
+
+      /*** IMAGE ***/
+      // to ensure that screen-readers are not reading "Image"
+      ExcludeSemantics(
+        child: ClipRRect(
+          child: Image.asset(
+            ...
+          ),
+        ),
+      ),
+
+      /*** PRODUCT NAME ***/
+      Text(
+        product.name,
+      ),
+
+      /*** PRODUCT PRICE ***/
+      Text(
+        '\$${product.price}',
+      ),
+
+      /*** BUTTON ***/
+      ExcludeSemantics(
+        child: CupertinoButton(
+          onPressed: () {
+            model.addProductToCart(product.id);
+          },
+
+          /*** ICON ***/
+          child: const Icon(
+            CupertinoIcons.plus_circled,
+            semanticLabel: 'Add',
+          ),
+        ),
+      ),
+    ],
+  ),
+);
+
+*/
