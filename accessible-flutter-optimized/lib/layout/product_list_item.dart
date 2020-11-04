@@ -49,8 +49,8 @@ class ProductRowItem extends StatelessWidget {
       // and on the opposite the onTap() event can not be triggered when the screen-reader is enabled
       // Screen-Reading: "Product name. Product price. Double tap to add to cart."
 
-      child: Semantics(
-
+      child: MergeSemantics(
+        child: Semantics(
         /*
         SemanticsService announcement is only necessary in the Semantic wrapper.
         If the semantics wrapper is tapped, the announcement occurs and the user gets haptic feedback,
@@ -119,8 +119,8 @@ class ProductRowItem extends StatelessWidget {
 
 
             /*** BUTTON ***/
-            ExcludeSemantics(
-              child: CupertinoButton(
+            //ExcludeSemantics(
+              /*child:*/ CupertinoButton(
                 padding: EdgeInsets.zero,
                 onPressed: () {
                   final model = Provider.of<AppStateModel>(context, listen: false);
@@ -135,12 +135,13 @@ class ProductRowItem extends StatelessWidget {
                 ),
 
               ),
-            ),
+            //),
 
 
           ],
         ),
       ),
+    ),
     );
 
     if (lastItem) {
