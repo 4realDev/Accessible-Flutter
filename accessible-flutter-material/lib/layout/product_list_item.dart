@@ -20,6 +20,8 @@ class ProductRowItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final model = Provider.of<AppStateModel>(context, listen: false);
+    int count = 0;
     final row = SafeArea(
       top: false,
       bottom: false,
@@ -63,7 +65,7 @@ class ProductRowItem extends StatelessWidget {
                   /*** PRODUCT PRICE ***/
                   const Padding(padding: EdgeInsets.only(top: 8)),
                   Text(
-                    '\$${product.price}',
+                    '${getProductCountInCart(model, product.id)} x ${product.price}\$',
                     style: Styles.productRowItemPrice,
                   )
 
@@ -78,7 +80,6 @@ class ProductRowItem extends StatelessWidget {
             enableFeedback: true, // is not provided in CupertinoButton, FloatingActionButton
             iconSize: 24.0,
             onPressed: () {
-              final model = Provider.of<AppStateModel>(context, listen: false);
               model.addProductToCart(product.id);
               SemanticsService.announce("${product.name} added to cart", TextDirection.ltr);
             },
@@ -124,5 +125,12 @@ class ProductRowItem extends StatelessWidget {
       ],
     );
 
+  }
+
+  String getProductCountInCart(AppStateModel model, int productId){
+    int count = model.getProductCountById(productId);
+    print(productId);
+    print(count);
+    return count.toString();
   }
 }
