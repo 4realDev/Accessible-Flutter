@@ -50,75 +50,75 @@ class ProductRowItem extends StatelessWidget {
       // and on the opposite the onTap() event can not be triggered when the screen-reader is enabled
       // Screen-Reading: "Product name. Product price. Double tap to add to cart."
 
-      child: MergeSemantics(
-        child: Semantics(
-          /*
-          SemanticsService announcement is only necessary in the Semantic wrapper.
-          If the semantics wrapper is tapped, the announcement occurs and the user gets haptic feedback,
-          that symbolizes, that the item is successful added to the cart
-           */
+      child: Semantics(
+        /*
+        SemanticsService announcement is only necessary in the Semantic wrapper.
+        If the semantics wrapper is tapped, the announcement occurs and the user gets haptic feedback,
+        that symbolizes, that the item is successful added to the cart
+         */
 
-          onTap: () {
-            model.addProductToCart(product.id);
-            SemanticsService.announce("${product.name} added to cart", TextDirection.ltr);
-          },
+        onTap: () {
+          model.addProductToCart(product.id);
+          SemanticsService.announce("${product.name} added to cart", TextDirection.ltr);
+        },
 
-          // onTapHint completes the "Double tap to" sentence with the given string
-          onTapHint: LanguageAdaptedStrings.productItemHint/*"add to cart"*/,
+        // onTapHint completes the "Double tap to" sentence with the given string
+        onTapHint: LanguageAdaptedStrings.productItemHint/*"add to cart"*/,
 
-          child: Row(
-            children: <Widget>[
+        child: Row(
+          children: <Widget>[
 
-              /*** IMAGE ***/
-              // to ensure that screen-readers are not reading "Image"
-              ExcludeSemantics(
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(4),
-                  child: Image.asset(
-                    product.assetName,
-                    package: product.assetPackage,
-                    fit: BoxFit.cover,
-                    width: 76,
-                    height: 76,
-                  ),
+            /*** IMAGE ***/
+            // to ensure that screen-readers are not reading "Image"
+            ExcludeSemantics(
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(4),
+                child: Image.asset(
+                  product.assetName,
+                  package: product.assetPackage,
+                  fit: BoxFit.cover,
+                  width: 76,
+                  height: 76,
                 ),
               ),
+            ),
 
 
-              /*** TEXT ***/
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 12),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
+            /*** TEXT ***/
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 12),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
 
-                      /*** PRODUCT NAME ***/
-                      Text(
-                        product.name,
-                        style: Styles.productRowItemName,
-                      ),
+                    /*** PRODUCT NAME ***/
+                    Text(
+                      product.name,
+                      style: Styles.productRowItemName,
+                    ),
 
-                      const Padding(padding: EdgeInsets.only(top: 8)),
+                    const Padding(padding: EdgeInsets.only(top: 8)),
 
-                      Semantics(
-                        label: '${product.price}\$, ${model.getProductCountById(product.id)} times added to cart',
-                        child: ExcludeSemantics(
-                          child: Text(
-                            '${model.getProductCountById(product.id)} x ${product.price}\$',
-                            style: Styles.productRowItemPrice,
-                          ),
+                    Semantics(
+                      label: '\$${product.price}, ${model.getProductCountById(product.id)} times added to cart',
+                      child: ExcludeSemantics(
+                        child: Text(
+                          '${model.getProductCountById(product.id)} x \$${product.price}',
+                          style: Styles.productRowItemPrice,
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
+            ),
 
 
-              /*** BUTTON ***/
-              CupertinoButton(
+            /*** BUTTON ***/
+            ExcludeSemantics(
+              child: CupertinoButton(
                 padding: EdgeInsets.zero,
                 onPressed: () {
                   model.addProductToCart(product.id);
@@ -130,10 +130,8 @@ class ProductRowItem extends StatelessWidget {
                   semanticLabel: 'Add',
                 ),
               ),
-
-
-            ],
-          ),
+            )
+          ],
         ),
       ),
     );
