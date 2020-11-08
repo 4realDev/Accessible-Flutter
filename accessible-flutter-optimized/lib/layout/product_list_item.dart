@@ -21,6 +21,7 @@ class ProductRowItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final model = Provider.of<AppStateModel>(context, listen: false);
     final row = SafeArea(
       top: false,
       bottom: false,
@@ -51,81 +52,73 @@ class ProductRowItem extends StatelessWidget {
 
       child: MergeSemantics(
         child: Semantics(
-        /*
-        SemanticsService announcement is only necessary in the Semantic wrapper.
-        If the semantics wrapper is tapped, the announcement occurs and the user gets haptic feedback,
-        that symbolizes, that the item is successful added to the cart
-         */
+          /*
+          SemanticsService announcement is only necessary in the Semantic wrapper.
+          If the semantics wrapper is tapped, the announcement occurs and the user gets haptic feedback,
+          that symbolizes, that the item is successful added to the cart
+           */
 
-        onTap: () {
-          final model = Provider.of<AppStateModel>(context, listen: false);
-          model.addProductToCart(product.id);
-          SemanticsService.announce("${product.name} added to cart", TextDirection.ltr);
-        },
+          onTap: () {
+            model.addProductToCart(product.id);
+            SemanticsService.announce("${product.name} added to cart", TextDirection.ltr);
+          },
 
-        /*onTap: () {
-          displayDialog(context);
-        },*/
+          // onTapHint completes the "Double tap to" sentence with the given string
+          onTapHint: LanguageAdaptedStrings.productItemHint/*"add to cart"*/,
 
-        // onTapHint completes the "Double tap to" sentence with the given string
-        onTapHint: LanguageAdaptedStrings.productItemHint/*"add to cart"*/,
+          child: Row(
+            children: <Widget>[
 
-        child: Row(
-          children: <Widget>[
-
-            /*** IMAGE ***/
-            // to ensure that screen-readers are not reading "Image"
-            ExcludeSemantics(
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(4),
-                child: Image.asset(
-                  product.assetName,
-                  package: product.assetPackage,
-                  fit: BoxFit.cover,
-                  width: 76,
-                  height: 76,
+              /*** IMAGE ***/
+              // to ensure that screen-readers are not reading "Image"
+              ExcludeSemantics(
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(4),
+                  child: Image.asset(
+                    product.assetName,
+                    package: product.assetPackage,
+                    fit: BoxFit.cover,
+                    width: 76,
+                    height: 76,
+                  ),
                 ),
               ),
-            ),
 
 
-            /*** TEXT ***/
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
+              /*** TEXT ***/
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
 
-                    /*** PRODUCT NAME ***/
-                    Text(
-                      product.name,
-                      style: Styles.productRowItemName,
-                    ),
+                      /*** PRODUCT NAME ***/
+                      Text(
+                        product.name,
+                        style: Styles.productRowItemName,
+                      ),
 
-                    const Padding(padding: EdgeInsets.only(top: 8)),
+                      const Padding(padding: EdgeInsets.only(top: 8)),
 
-                    /*** PRODUCT PRICE ***/
-                    Text(
-                      '\$${product.price}',
-                        style: Styles.productRowItemPrice,
-                    ),
+                      /*** PRODUCT PRICE ***/
+                      Text(
+                        '\$${product.price}',
+                          style: Styles.productRowItemPrice,
+                      ),
 
-                  ],
+                    ],
+                  ),
                 ),
               ),
-            ),
 
 
-            /*** BUTTON ***/
-            //ExcludeSemantics(
-              /*child:*/ CupertinoButton(
+              /*** BUTTON ***/
+              CupertinoButton(
                 padding: EdgeInsets.zero,
                 onPressed: () {
-                  final model = Provider.of<AppStateModel>(context, listen: false);
                   model.addProductToCart(product.id);
-                  SemanticsService.announce("${product.name} added to cart", TextDirection.ltr);
                 },
 
                 /*** ICON ***/
@@ -133,15 +126,13 @@ class ProductRowItem extends StatelessWidget {
                   CupertinoIcons.plus_circled,
                   semanticLabel: 'Add',
                 ),
-
               ),
-            //),
 
 
-          ],
+            ],
+          ),
         ),
       ),
-    ),
     );
 
     if (lastItem) {
