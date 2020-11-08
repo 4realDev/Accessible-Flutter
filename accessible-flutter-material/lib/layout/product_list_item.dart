@@ -62,13 +62,18 @@ class ProductRowItem extends StatelessWidget {
                     style: Styles.productRowItemName,
                   ),
 
-                  /*** PRODUCT PRICE ***/
                   const Padding(padding: EdgeInsets.only(top: 8)),
-                  Text(
-                    '${getProductCountInCart(model, product.id)} x ${product.price}\$',
-                    style: Styles.productRowItemPrice,
-                  )
 
+                  /*** PRODUCT PRICE ***/
+                  Semantics(
+                    label: '${product.price}\$, ${model.getProductCountById(product.id)} times added to cart',
+                    child: ExcludeSemantics(
+                      child: Text(
+                        '${model.getProductCountById(product.id)} x ${product.price}\$',
+                        style: Styles.productRowItemPrice,
+                      ),
+                    )
+                  ),
                 ],
               ),
             ),
@@ -127,10 +132,15 @@ class ProductRowItem extends StatelessWidget {
 
   }
 
-  String getProductCountInCart(AppStateModel model, int productId){
-    int count = model.getProductCountById(productId);
-    print(productId);
-    print(count);
-    return count.toString();
-  }
+  /*void showToast(BuildContext context, Product currentProduct) {
+    final scaffold = Scaffold.of(context);
+    scaffold.showSnackBar(
+      SnackBar(
+        content: Text("${currentProduct.name} added to cart"),
+        duration: new Duration(seconds: 2),
+        action: SnackBarAction(
+            label: 'UNDO', onPressed: scaffold.hideCurrentSnackBar),
+      ),
+    );
+  }*/
 }

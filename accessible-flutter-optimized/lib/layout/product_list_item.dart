@@ -102,12 +102,15 @@ class ProductRowItem extends StatelessWidget {
 
                       const Padding(padding: EdgeInsets.only(top: 8)),
 
-                      /*** PRODUCT PRICE ***/
-                      Text(
-                        '\$${product.price}',
-                          style: Styles.productRowItemPrice,
+                      Semantics(
+                        label: '${product.price}\$, ${model.getProductCountById(product.id)} times added to cart',
+                        child: ExcludeSemantics(
+                          child: Text(
+                            '${model.getProductCountById(product.id)} x ${product.price}\$',
+                            style: Styles.productRowItemPrice,
+                          ),
+                        ),
                       ),
-
                     ],
                   ),
                 ),
@@ -157,82 +160,4 @@ class ProductRowItem extends StatelessWidget {
     );
 
   }
-
-  void displayDialog(BuildContext context) {
-    showCupertinoDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (BuildContext context) => new Semantics(
-        //onDidGainAccessibilityFocus: ?,
-        //?? onSetSelection ??
-        onDidGainAccessibilityFocus: () { debugPrint('All right, do not do that again though.'); },
-        child: CupertinoAlertDialog(
-          title: new Text("Item added to cart"),
-          insetAnimationDuration: const Duration(milliseconds: 100),
-          actions: <Widget>[
-            new CupertinoDialogAction(
-                child: const Text('Discard'),
-                isDestructiveAction: true,
-                isDefaultAction: true,
-                onPressed: () { Navigator.pop(context, 'Discard'); }
-            ),
-          ],
-        ),
-      ),
-    );
-  }
 }
-
-
-
-/*
-child: Semantics(
-  onTap: () {
-    model.addProductToCart(product.id);
-  },
-
-  // onTapHint completes the "Double tap to" sentence with the given string
-  onTapHint: LanguageAdaptedStrings.productItemHint/*"add to cart"*/,
-
-  child: Row(
-    children: <Widget>[
-
-      /*** IMAGE ***/
-      // to ensure that screen-readers are not reading "Image"
-      ExcludeSemantics(
-        child: ClipRRect(
-          child: Image.asset(
-            ...
-          ),
-        ),
-      ),
-
-      /*** PRODUCT NAME ***/
-      Text(
-        product.name,
-      ),
-
-      /*** PRODUCT PRICE ***/
-      Text(
-        '\$${product.price}',
-      ),
-
-      /*** BUTTON ***/
-      ExcludeSemantics(
-        child: CupertinoButton(
-          onPressed: () {
-            model.addProductToCart(product.id);
-          },
-
-          /*** ICON ***/
-          child: const Icon(
-            CupertinoIcons.plus_circled,
-            semanticLabel: 'Add',
-          ),
-        ),
-      ),
-    ],
-  ),
-);
-
-*/

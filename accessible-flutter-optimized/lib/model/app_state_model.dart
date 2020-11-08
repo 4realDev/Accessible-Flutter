@@ -110,6 +110,12 @@ class AppStateModel extends foundation.ChangeNotifier {
     return _availableProducts.firstWhere((p) => p.id == id);
   }
 
+  // Returns the number of a product added in the cart matching the provided id
+  // If the number is null -> return 0
+  int getProductCountById(int productId) {
+    return _productsInCart[productId] ?? 0;
+  }
+
   // Removes everything from the cart.
   void clearCart() {
     _productsInCart.clear();
