@@ -7,7 +7,7 @@
          FlutterApplication and put your custom class here. -->
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="cupertino_store"
+        android:label="original_store"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
