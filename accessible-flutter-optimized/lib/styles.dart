@@ -9,6 +9,13 @@ abstract class Styles {
     fontWeight: FontWeight.normal,
   );
 
+  static const TextStyle cartProductRowItemName = TextStyle(
+    color: Color.fromRGBO(0, 0, 0, 0.8),
+    fontSize: 16,
+    fontStyle: FontStyle.normal,
+    fontWeight: FontWeight.normal,
+  );
+
   static const TextStyle productRowTotal = TextStyle(
     color: Color.fromRGBO(0, 0, 0, 0.8),
     fontSize: 18,
@@ -19,6 +26,12 @@ abstract class Styles {
   static const TextStyle productRowItemPrice = TextStyle(
     color: Color(0xFF8E8E93),
     fontSize: 13,
+    fontWeight: FontWeight.w300,
+  );
+
+  static const TextStyle productTabDescription = TextStyle(
+    color: Color(0xFF8E8E93),
+    fontSize: 16,
     fontWeight: FontWeight.w300,
   );
 

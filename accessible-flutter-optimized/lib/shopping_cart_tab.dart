@@ -118,9 +118,11 @@ class _ShoppingCartTabState extends State<ShoppingCartTab>{
                 ),
               ],
             ),
-            Text(
-              DateFormat.yMMMd().add_jm().format(dateTime), // default Time = DateTime.now()
-              style: Styles.deliveryTime,
+            Expanded(
+              child: Text(
+                DateFormat.yMMMd().add_jm().format(dateTime), // default Time = DateTime.now()
+                style: Styles.deliveryTime,
+              ),
             ),
           ],
         ),
@@ -198,23 +200,30 @@ class _ShoppingCartTabState extends State<ShoppingCartTab>{
 
                     /*** DISPLAY THREE TEXTES ***/
                     children: <Widget>[
+
+                      const SizedBox(height: 24),
+
                       Text(
                         'Shipping '
                             '${_currencyFormat.format(model.shippingCost)}',
                         style: Styles.productRowItemPrice,
                       ),
+
                       const SizedBox(height: 6),
 
                       Text(
                         'Tax ${_currencyFormat.format(model.tax)}',
                         style: Styles.productRowItemPrice,
                       ),
+
                       const SizedBox(height: 6),
 
                       Text(
                         'Total  ${_currencyFormat.format(model.totalCost)}',
                         style: Styles.productRowTotal,
                       ),
+
+                      const SizedBox(height: 18),
 
                     ],
                   )

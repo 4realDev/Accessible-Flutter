@@ -1,5 +1,8 @@
+import 'package:cupertino_store/model/app_state_model.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 import '../styles.dart';
 import '../model/product.dart';
 
@@ -42,35 +45,64 @@ class ShoppingCartItem extends StatelessWidget {
                 height: 40,
               ),
             ),
+
+            const SizedBox(
+              width: 16,
+            ),
+
+            Container(
+              width: 120.0,
+                child: Text(
+                  product.name,
+                  style: Styles.cartProductRowItemName,
+                ),
+            ),
+
+            const SizedBox(
+              width: 16,
+            ),
+
             Expanded(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Text(
-                          product.name,
-                          style: Styles.productRowItemName,
-                        ),
+
                         Text(
                           '${formatter.format(quantity * product.price)}',
                           style: Styles.productRowItemName,
                         ),
-                      ],
-                    ),
+                    
                     const SizedBox(
                       height: 4,
                     ),
+                    
                     Text(
-                      '${quantity > 1 ? '$quantity x ' : ''}'
+                      '${quantity >= 1 ? '$quantity x ' : ''}'
                           '${formatter.format(product.price)}',
                       style: Styles.productRowItemPrice,
                     )
                   ],
+                ),
+            ),
+
+            const SizedBox(
+              width: 16,
+            ),
+
+            /*** BUTTON ***/
+            ExcludeSemantics(
+              child: CupertinoButton(
+                padding: EdgeInsets.all(8.0),
+                onPressed: () {
+                  final model = Provider.of<AppStateModel>(context, listen: false);
+                  model.removeItemFromCart(product.id);
+                },
+
+                /*** ICON ***/
+                child: const Icon(
+                  CupertinoIcons.minus_circled,
+                  semanticLabel: 'Remove',
                 ),
               ),
             ),
@@ -79,6 +111,26 @@ class ShoppingCartItem extends StatelessWidget {
       ),
     );
 
-    return row;
+    if (lastItem) {
+      return row;
+    }
+
+    /*** DIVIDER ***/
+    return Column(
+      children: <Widget>[
+        row,
+        Padding(
+          padding: const EdgeInsets.only(
+            left: 16,
+            right: 16,
+          ),
+          child: Container(
+            height: 1,
+            color: Styles.productRowDivider,
+          ),
+        ),
+      ],
+    );
+    //return row;
   }
 }
