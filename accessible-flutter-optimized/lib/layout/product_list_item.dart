@@ -59,7 +59,7 @@ class ProductRowItem extends StatelessWidget {
 
         onTap: () {
           model.addProductToCart(product.id);
-          SemanticsService.announce("${product.name} added to cart", TextDirection.ltr);
+          SemanticsService.announce('${product.name} ${LanguageAdaptedStrings.productAddAnnouncementSemantic}', TextDirection.ltr);
         },
 
         // onTapHint completes the "Double tap to" sentence with the given string
@@ -101,14 +101,11 @@ class ProductRowItem extends StatelessWidget {
 
                     const Padding(padding: EdgeInsets.only(top: 8)),
 
-                    Semantics(
-                      label: '\$${product.price}, ${model.getProductCountById(product.id)} times added to cart',
-                      child: ExcludeSemantics(
-                        child: Text(
-                          '${model.getProductCountById(product.id)} x \$${product.price}',
-                          style: Styles.productRowItemPrice,
-                        ),
-                      ),
+                    Text(
+                      '${model.getProductCountById(product.id)} x \$${product.price}',
+                      // product count times added to cart / produkt count Mal zum Warenkorb hinzugefügt
+                      semanticsLabel: '\$${product.price}, ${model.getProductCountById(product.id)} ${LanguageAdaptedStrings.productCounterSemantic}',
+                      style: Styles.productRowItemPrice,
                     ),
                   ],
                 ),

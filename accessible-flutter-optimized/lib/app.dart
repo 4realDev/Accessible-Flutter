@@ -38,20 +38,21 @@ class CupertinoStoreHomePage extends StatelessWidget {
     return CupertinoTabScaffold(
       tabBar: CupertinoTabBar(
         // Array with BottomNavigationBarItems
-        items: const<BottomNavigationBarItem>[
+        // Remove 'const' to be able to change the Text attribute
+        items: /*const*/<BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(CupertinoIcons.home),
-            title: Text('Products'),
+            title: Text(LanguageAdaptedStrings.productTab),
           ),
 
           BottomNavigationBarItem(
             icon: Icon(CupertinoIcons.search),
-            title: Text('Search'),
+            title: Text(LanguageAdaptedStrings.searchTab),
           ),
 
           BottomNavigationBarItem(
             icon: Icon(CupertinoIcons.shopping_cart),
-            title: Text('Cart'),
+            title: Text(LanguageAdaptedStrings.cartTab),
           ),
         ],
       ),

@@ -1,3 +1,5 @@
+import 'package:cupertino_store/language_adapted_strings.dart';
+import 'package:cupertino_store/styles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 
@@ -16,13 +18,47 @@ class ProductListTab extends StatelessWidget {
             const CupertinoSliverNavigationBar(
               largeTitle: Text('Cupertino Store vAnnouncement'),
             ),
+
+            SliverToBoxAdapter(
+                child: SafeArea(
+                  top: false,
+                  bottom: false,
+                  minimum: const EdgeInsets.only(
+                    left: 16,
+                    top: 16,
+                    bottom: 32,
+                    right: 16,
+                  ),
+                  child: Text(
+                      LanguageAdaptedStrings.productTabDescription,
+                      style: Styles.productTabDescription,
+                  ),
+                ),
+            ),
+
+            SliverToBoxAdapter(
+                child: Column(
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      left: 0,
+                      right: 0,
+                    ),
+                    child: Container(
+                      height: 1,
+                      color: Styles.productRowDivider,
+                    ),
+                  ),
+                ],
+            ),
+            ),
+
             SliverSafeArea(
               top: false,
               minimum: const EdgeInsets.only(top: 8),
               sliver: SliverList(
-                delegate: SliverChildBuilderDelegate(
-                      (context, index) {
-                    if (index < products.length) {
+                delegate: SliverChildBuilderDelegate((context, index) {
+                  if (index < products.length) {
                       return ProductRowItem(
                         index: index,
                         product: products[index],
