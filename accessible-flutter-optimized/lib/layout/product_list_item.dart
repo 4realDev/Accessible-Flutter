@@ -1,12 +1,12 @@
-import 'package:cupertino_store/language_adapted_strings.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
 
-import '../model/app_state_model.dart';
-import '../model/product.dart';
 import '../styles.dart';
+import '../language_adapted_strings.dart';
+import '../model/product.dart';
+import '../model/app_state_model.dart';
 
 class ProductRowItem extends StatelessWidget {
   const ProductRowItem({
