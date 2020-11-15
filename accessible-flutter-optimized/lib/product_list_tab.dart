@@ -15,10 +15,13 @@ class ProductListTab extends StatelessWidget {
         return CustomScrollView(
           semanticChildCount: products.length,
           slivers: <Widget>[
+
+            /*** NAVIGATION-BAR ***/
             const CupertinoSliverNavigationBar(
               largeTitle: Text('Cupertino Store'),
             ),
 
+            /*** INTRO-TEXT ***/
             SliverToBoxAdapter(
                 child: SafeArea(
                   top: false,
@@ -36,6 +39,7 @@ class ProductListTab extends StatelessWidget {
                 ),
             ),
 
+            /*** ROW-DIVIDER ***/
             SliverToBoxAdapter(
                 child: Column(
                 children: <Widget>[
@@ -53,6 +57,7 @@ class ProductListTab extends StatelessWidget {
             ),
             ),
 
+            /*** PRODUCT-LIST ***/
             SliverSafeArea(
               top: false,
               minimum: const EdgeInsets.only(top: 8),
@@ -65,13 +70,13 @@ class ProductListTab extends StatelessWidget {
                         lastItem: index == products.length - 1,
                       );
                     }
-
                     // If there are no products left, return null
                     return null;
                   },
                 ),
               ),
             )
+
           ],
         );
       },
