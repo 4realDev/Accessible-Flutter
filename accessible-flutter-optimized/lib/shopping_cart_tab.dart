@@ -1,3 +1,4 @@
+import 'package:cupertino_store/language_adapted_strings.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 import 'model/app_state_model.dart';
@@ -142,11 +143,54 @@ class _ShoppingCartTabState extends State<ShoppingCartTab>{
     );
   }
 
+  Widget _buildCartDesciptionText(BuildContext context) {
+    final model = Provider.of<AppStateModel>(context, listen: false);
+    return SafeArea(
+      top: false,
+      bottom: false,
+
+      child: Semantics(
+        // If there are more then 0 products inside the cart, read the semantic hint
+        hint: model.totalCartQuantity > 0 ? LanguageAdaptedStrings.cartListHintSemantic : null,
+
+        child: Column(
+          children: <Widget>[
+
+            /*** ROW-DIVIDER ***/
+            Container(
+              height: 1,
+              color: Styles.productRowDivider,
+            ),
+
+            SizedBox(height: 32),
+
+            /*** SHOPPING CART LIST SUBHEADING ***/
+            Text(
+              LanguageAdaptedStrings.cartListHeading,
+              style: Styles.productRowTotal,
+            ),
+
+            SizedBox(height: 6),
+
+            /*** TOTAL PRODUCT COUNT IN CART DESCRIPTION ***/
+            Text(
+              '${model.totalCartQuantity} ${LanguageAdaptedStrings.cartListCount}',
+              style: Styles.productTabDescription,
+              // semanticsLabel: model.totalCartQuantity > 0 ? '${model.totalCartQuantity} products currently added. Swipe right to hear the products.' : null,
+            ),
+
+          ],
+        ),
+      ),
+
+    );
+  }
+
   SliverChildBuilderDelegate _buildSliverChildBuilderDelegate(AppStateModel model) {
     return SliverChildBuilderDelegate((context, index) {
 
       // to count the shopping_cart_items beginning with 0 (currently default is 4)
-      final productIndex = index - 4;
+      final productIndex = index - 5;
       switch (index) {
         case 0:
           return Padding(
@@ -165,10 +209,15 @@ class _ShoppingCartTabState extends State<ShoppingCartTab>{
           );
         case 3:
           return Padding(
-            padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
+            padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
             child: _buildDateAndTimePicker(context),
           );
-
+        case 4:
+          return Padding(
+            padding: const EdgeInsets.fromLTRB(0, 0, 0, 24),
+            child: _buildCartDesciptionText(context),
+          );
+          
         default:
 
           /*** LOAD PRODUCT ***/
