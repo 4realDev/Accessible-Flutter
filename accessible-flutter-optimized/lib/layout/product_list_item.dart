@@ -118,7 +118,7 @@ class ProductRowItem extends StatelessWidget {
 
               /*** BUTTON ***/
               ExcludeSemantics(
-                excluding: Platform.isIOS ? true : false,
+                excluding: Platform.isIOS ? false : true,
                 child: CupertinoButton(
                   padding: EdgeInsets.zero,
                   onPressed: () {

@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:ui';
 
 import 'package:cupertino_store/language_adapted_strings.dart';
 import 'package:flutter/cupertino.dart';
@@ -12,28 +11,28 @@ import 'layout/shopping_cart_item.dart';
 import 'styles.dart';
 import 'package:intl/intl.dart' as numberFormatLib;
 
-const double _kDateTimePickerHeight = 216;  // height of the DateTimePicker
+const double _kDateTimePickerHeight = 216; // height of the DateTimePicker
 
-class ShoppingCartTab extends StatefulWidget{
+class ShoppingCartTab extends StatefulWidget {
   @override
   _ShoppingCartTabState createState() {
     return _ShoppingCartTabState();
   }
 }
 
-class _ShoppingCartTabState extends State<ShoppingCartTab>{
-
+class _ShoppingCartTabState extends State<ShoppingCartTab> {
   String name;
   String email;
   String location;
   String pin;
   DateTime dateTime = DateTime.now();
+
   // Currency formatter - used in calculations
   final _currencyFormat = numberFormatLib.NumberFormat.currency(symbol: '\$');
+  TextEditingController _controller = new TextEditingController();
+  FocusNode _focusNode = new FocusNode();
 
   Widget _buildCustomNameField() {
-    TextEditingController _controller = new TextEditingController();
-    FocusNode _focusNode = new FocusNode();
     _onChangeText(value) => debugPrint("_onChangeText: $value");
     _onSubmittedText(value) => debugPrint("_onSubmittedText: $value");
 
@@ -42,46 +41,60 @@ class _ShoppingCartTabState extends State<ShoppingCartTab>{
             children: [
               Row(
                 children: [
-
-                  /*** ICON ***/
-                  const Icon(
-                    CupertinoIcons.person_solid,
-                    color: CupertinoColors.lightBackgroundGray,
-                    size: 28,
+                  ExcludeSemantics(
+                    child: /*** ICON ***/
+                        const Icon(
+                      CupertinoIcons.person_solid,
+                      color: CupertinoColors.lightBackgroundGray,
+                      size: 28,
+                    ),
                   ),
-
-                  // TextField doesn't have an intrinsic width; only sizes itself to the full width of its parent
-                  // Therefore wrap TextField inside Flexible or Expanded to tell the Row that the TextField takes the remaining space
                   Expanded(
+                      child: Semantics(
                     child: NativeTextInput(
-                        placeholder: "custom",
-                        keyboardType: KeyboardType.defaultType,
-                        onChanged: _onChangeText,
-                        onSubmitted: _onSubmittedText,
-                        focusNode: _focusNode)
-                  ),
+                      controller: _controller,
+                      focusNode: _focusNode,
+                      keyboardType: KeyboardType.defaultType,
+                      textContentType: TextContentType.name,
+                      placeholder: 'Name',
+                      onChanged: (newName) {
+                        setState(() {
+                          name = newName;
+                        });
+                      },
+                    ), //_buildCustomNameField(),
+                  )),
+                  MergeSemantics(
+                    child: GestureDetector(
+                      onTap: () {
+                        _controller.clear();
+                      },
+                      child: Semantics(
+                        onTap: () {
+                          _controller.clear();
+                          //SemanticsService.announce("SearchBar cleared", TextDirection.ltr);
+                        },
+                        button: true,
 
-                  GestureDetector(
-                    onTap: () {
-                      _controller.clear();
-                      SemanticsService.announce("SearchBar cleared", TextDirection.ltr);
-                    },
-                    child: const Icon(
-                      CupertinoIcons.clear_thick_circled,
-                      color: Styles.searchIconColor,
+                        //onTapHint: "to clear the text.",
+                        child: const Icon(
+                          CupertinoIcons.clear_thick_circled,
+                          color: Styles.searchIconColor,
+                          semanticLabel: "Clear",
+                        ),
+                      ),
                     ),
                   ),
                 ],
               ),
-
               SizedBox(height: 6),
-
               Container(
                 height: 1,
                 color: Styles.productRowDivider,
               ),
             ],
           )
+
         : CupertinoTextField(
             prefix: const Icon(
               CupertinoIcons.person_solid,
@@ -205,7 +218,8 @@ class _ShoppingCartTabState extends State<ShoppingCartTab>{
             ),
             Expanded(
               child: Text(
-                numberFormatLib.DateFormat.yMMMd().add_jm().format(dateTime), // default Time = DateTime.now()
+                numberFormatLib.DateFormat.yMMMd().add_jm().format(dateTime),
+                // default Time = DateTime.now()
                 style: Styles.deliveryTime,
               ),
             ),
@@ -232,20 +246,19 @@ class _ShoppingCartTabState extends State<ShoppingCartTab>{
     return SafeArea(
       top: false,
       bottom: false,
-
       child: Semantics(
         // If there are more then 0 products inside the cart, read the semantic hint
-        hint: model.totalCartQuantity > 0 ? LanguageAdaptedStrings.cartListHintSemantic : null,
+        hint: model.totalCartQuantity > 0
+            ? LanguageAdaptedStrings.cartListHintSemantic
+            : null,
 
         child: Column(
           children: <Widget>[
-
             /*** ROW-DIVIDER ***/
             Container(
               height: 1,
               color: Styles.productRowDivider,
             ),
-
             SizedBox(height: 32),
 
             /*** SHOPPING CART LIST SUBHEADING ***/
@@ -253,7 +266,6 @@ class _ShoppingCartTabState extends State<ShoppingCartTab>{
               LanguageAdaptedStrings.cartListHeading,
               style: Styles.productRowTotal,
             ),
-
             SizedBox(height: 6),
 
             /*** TOTAL PRODUCT COUNT IN CART DESCRIPTION ***/
@@ -262,17 +274,15 @@ class _ShoppingCartTabState extends State<ShoppingCartTab>{
               style: Styles.productTabDescription,
               // semanticsLabel: model.totalCartQuantity > 0 ? '${model.totalCartQuantity} products currently added. Swipe right to hear the products.' : null,
             ),
-
           ],
         ),
       ),
-
     );
   }
 
-  SliverChildBuilderDelegate _buildSliverChildBuilderDelegate(AppStateModel model) {
+  SliverChildBuilderDelegate _buildSliverChildBuilderDelegate(
+      AppStateModel model) {
     return SliverChildBuilderDelegate((context, index) {
-
       // to count the shopping_cart_items beginning with 0 (currently default is 4)
       final productIndex = index - 5;
       switch (index) {
@@ -281,6 +291,7 @@ class _ShoppingCartTabState extends State<ShoppingCartTab>{
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: _buildCustomNameField(),
           );
+
         case 1:
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -301,17 +312,18 @@ class _ShoppingCartTabState extends State<ShoppingCartTab>{
             padding: const EdgeInsets.fromLTRB(0, 0, 0, 24),
             child: _buildCartDesciptionText(context),
           );
-          
-        default:
 
+        default:
           /*** LOAD PRODUCT ***/
           // When the number of loaded products in the SliverChildBuilderDelegate are smaller then number of products in the cart,
           // then load more products from the cart in the SliverChildBuilderDelegate (automatically increases the productIndex)
           if (model.productsInCart.length > productIndex) {
             return ShoppingCartItem(
               index: index,
-              product: model.getProductById(model.productsInCart.keys.toList()[productIndex]),
-              quantity: model.productsInCart.values.toList()[productIndex], // used in '${formatter.format(quantity * product.price)}'
+              product: model.getProductById(
+                  model.productsInCart.keys.toList()[productIndex]),
+              quantity: model.productsInCart.values.toList()[productIndex],
+              // used in '${formatter.format(quantity * product.price)}'
               lastItem: productIndex == model.productsInCart.length - 1,
               formatter: _currencyFormat,
             );
@@ -322,7 +334,7 @@ class _ShoppingCartTabState extends State<ShoppingCartTab>{
           // Display the Shipping, Taxes and Total cost
           // Why use productsInCart.keys ?
           else if (model.productsInCart.keys.length == productIndex &&
-                   model.productsInCart.isNotEmpty) {
+              model.productsInCart.isNotEmpty) {
             return Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Row(
@@ -333,31 +345,23 @@ class _ShoppingCartTabState extends State<ShoppingCartTab>{
 
                     /*** DISPLAY THREE TEXTES ***/
                     children: <Widget>[
-
                       const SizedBox(height: 24),
-
                       Text(
                         'Shipping '
-                            '${_currencyFormat.format(model.shippingCost)}',
+                        '${_currencyFormat.format(model.shippingCost)}',
                         style: Styles.productRowItemPrice,
                       ),
-
                       const SizedBox(height: 6),
-
                       Text(
                         'Tax ${_currencyFormat.format(model.tax)}',
                         style: Styles.productRowItemPrice,
                       ),
-
                       const SizedBox(height: 6),
-
                       Text(
                         'Total  ${_currencyFormat.format(model.totalCost)}',
                         style: Styles.productRowTotal,
                       ),
-
                       const SizedBox(height: 18),
-
                     ],
                   )
                 ],
@@ -375,11 +379,9 @@ class _ShoppingCartTabState extends State<ShoppingCartTab>{
       builder: (context, model, child) {
         return CustomScrollView(
           slivers: <Widget>[
-
             const CupertinoSliverNavigationBar(
               largeTitle: Text('Shopping Cart'),
             ),
-
             SliverSafeArea(
               top: false,
               minimum: const EdgeInsets.only(top: 4),
@@ -389,7 +391,6 @@ class _ShoppingCartTabState extends State<ShoppingCartTab>{
                 delegate: _buildSliverChildBuilderDelegate(model),
               ),
             )
-
           ],
         );
       },

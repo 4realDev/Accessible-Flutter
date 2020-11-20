@@ -117,7 +117,7 @@ class ShoppingCartItem extends StatelessWidget {
                 /*** BUTTON ***/
                 ExcludeSemantics(
                   // If the current platform is not iOS, then exclude the button
-                  excluding: Platform.isIOS ? true : false,
+                  excluding: Platform.isIOS ? false : true,
                   child: CupertinoButton(
                     padding: EdgeInsets.all(8.0),
                     onPressed: () {
