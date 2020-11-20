@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -116,6 +118,7 @@ class ProductRowItem extends StatelessWidget {
 
               /*** BUTTON ***/
               ExcludeSemantics(
+                excluding: Platform.isIOS ? true : false,
                 child: CupertinoButton(
                   padding: EdgeInsets.zero,
                   onPressed: () {

@@ -1,10 +1,16 @@
+import 'dart:io';
+import 'dart:ui';
+
 import 'package:cupertino_store/language_adapted_strings.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter_native_text_input/flutter_native_text_input.dart';
 import 'package:provider/provider.dart';
 import 'model/app_state_model.dart';
 import 'layout/shopping_cart_item.dart';
-import 'package:intl/intl.dart';  // needed for DateFormat.yMMMd()
 import 'styles.dart';
+import 'package:intl/intl.dart' as numberFormatLib;
 
 const double _kDateTimePickerHeight = 216;  // height of the DateTimePicker
 
@@ -23,7 +29,85 @@ class _ShoppingCartTabState extends State<ShoppingCartTab>{
   String pin;
   DateTime dateTime = DateTime.now();
   // Currency formatter - used in calculations
-  final _currencyFormat = NumberFormat.currency(symbol: '\$');
+  final _currencyFormat = numberFormatLib.NumberFormat.currency(symbol: '\$');
+
+  Widget _buildCustomNameField() {
+    TextEditingController _controller = new TextEditingController();
+    FocusNode _focusNode = new FocusNode();
+    _onChangeText(value) => debugPrint("_onChangeText: $value");
+    _onSubmittedText(value) => debugPrint("_onSubmittedText: $value");
+
+    return Platform.isIOS
+        ? Column(
+            children: [
+              Row(
+                children: [
+
+                  /*** ICON ***/
+                  const Icon(
+                    CupertinoIcons.person_solid,
+                    color: CupertinoColors.lightBackgroundGray,
+                    size: 28,
+                  ),
+
+                  // TextField doesn't have an intrinsic width; only sizes itself to the full width of its parent
+                  // Therefore wrap TextField inside Flexible or Expanded to tell the Row that the TextField takes the remaining space
+                  Expanded(
+                    child: NativeTextInput(
+                        placeholder: "custom",
+                        keyboardType: KeyboardType.defaultType,
+                        onChanged: _onChangeText,
+                        onSubmitted: _onSubmittedText,
+                        focusNode: _focusNode)
+                  ),
+
+                  GestureDetector(
+                    onTap: () {
+                      _controller.clear();
+                      SemanticsService.announce("SearchBar cleared", TextDirection.ltr);
+                    },
+                    child: const Icon(
+                      CupertinoIcons.clear_thick_circled,
+                      color: Styles.searchIconColor,
+                    ),
+                  ),
+                ],
+              ),
+
+              SizedBox(height: 6),
+
+              Container(
+                height: 1,
+                color: Styles.productRowDivider,
+              ),
+            ],
+          )
+        : CupertinoTextField(
+            prefix: const Icon(
+              CupertinoIcons.person_solid,
+              color: CupertinoColors.lightBackgroundGray,
+              size: 28,
+            ),
+            padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 12),
+            clearButtonMode: OverlayVisibilityMode.editing,
+            textCapitalization: TextCapitalization.words,
+            autocorrect: false,
+            decoration: const BoxDecoration(
+              border: Border(
+                bottom: BorderSide(
+                  width: 0,
+                  color: CupertinoColors.inactiveGray,
+                ),
+              ),
+            ),
+            placeholder: 'Name',
+            onChanged: (newName) {
+              setState(() {
+                name = newName;
+              });
+            },
+          );
+  }
 
   Widget _buildNameField() {
     return CupertinoTextField(
@@ -121,7 +205,7 @@ class _ShoppingCartTabState extends State<ShoppingCartTab>{
             ),
             Expanded(
               child: Text(
-                DateFormat.yMMMd().add_jm().format(dateTime), // default Time = DateTime.now()
+                numberFormatLib.DateFormat.yMMMd().add_jm().format(dateTime), // default Time = DateTime.now()
                 style: Styles.deliveryTime,
               ),
             ),
@@ -195,7 +279,7 @@ class _ShoppingCartTabState extends State<ShoppingCartTab>{
         case 0:
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: _buildNameField(),
+            child: _buildCustomNameField(),
           );
         case 1:
           return Padding(

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -114,6 +116,8 @@ class ShoppingCartItem extends StatelessWidget {
 
                 /*** BUTTON ***/
                 ExcludeSemantics(
+                  // If the current platform is not iOS, then exclude the button
+                  excluding: Platform.isIOS ? true : false,
                   child: CupertinoButton(
                     padding: EdgeInsets.all(8.0),
                     onPressed: () {
