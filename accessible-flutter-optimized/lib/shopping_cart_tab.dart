@@ -1,6 +1,5 @@
 import 'package:cupertino_store/language_adapted_strings.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_native_text_input/flutter_native_text_input.dart';
 import 'package:provider/provider.dart';
 import 'model/app_state_model.dart';
 import 'layout/shopping_cart_item.dart';
@@ -27,7 +26,7 @@ class _ShoppingCartTabState extends State<ShoppingCartTab>{
   final _currencyFormat = NumberFormat.currency(symbol: '\$');
 
   Widget _buildNameField() {
-    return /*CupertinoTextField(
+    return CupertinoTextField(
       prefix: const Icon(
         CupertinoIcons.person_solid,
         color: CupertinoColors.lightBackgroundGray,
@@ -51,8 +50,7 @@ class _ShoppingCartTabState extends State<ShoppingCartTab>{
           name = newName;
         });
       },
-    );*/
-    NativeTextInput(placeholder: "HELLO",);
+    );
   }
 
   Widget _buildEmailField() {

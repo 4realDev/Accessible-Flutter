@@ -14,7 +14,6 @@ dependencies:
   intl: ^0.16.1 # provides internationalization and localization facilities
   provider: ^4.1.1 # provides a simple way to manage state across screens
   shrine_images: ^1.0.0 # containing products images
-  flutter_native_text_input: ^0.1.1
 
 dev_dependencies:
   pedantic: ^1.9.0
