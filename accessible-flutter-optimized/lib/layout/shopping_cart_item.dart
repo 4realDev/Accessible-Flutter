@@ -49,7 +49,7 @@ class ShoppingCartItem extends StatelessWidget {
 
             onTap: () {
               model.removeItemFromCart(product.id);
-              SemanticsService.announce('${product.name} ${LanguageAdaptedStrings.cartItemRemoveAnnouncementSemantic}', TextDirection.ltr);
+              SemanticsService.announce('${product.name} ${LanguageAdaptedStrings.cartItemRemoveSemanticAnnouncement}', TextDirection.ltr);
             },
 
             // onTapHint completes the "Double tap to" sentence with the given string

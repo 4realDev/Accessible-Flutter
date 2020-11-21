@@ -62,7 +62,7 @@ class ProductRowItem extends StatelessWidget {
 
           onTap: () {
             model.addProductToCart(product.id);
-            SemanticsService.announce('${product.name} ${LanguageAdaptedStrings.productAddAnnouncementSemantic}', TextDirection.ltr);
+            SemanticsService.announce('${product.name} ${LanguageAdaptedStrings.productAddSemanticAnnouncement}', TextDirection.ltr);
           },
 
           // onTapHint completes the "Double tap to" sentence with the given string

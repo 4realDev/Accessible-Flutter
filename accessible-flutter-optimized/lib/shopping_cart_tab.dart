@@ -1,9 +1,8 @@
-import 'dart:io';
-
 import 'package:cupertino_store/language_adapted_strings.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'dart:io';
 import 'package:flutter_native_text_input/flutter_native_text_input.dart';
 import 'package:provider/provider.dart';
 import 'model/app_state_model.dart';
@@ -29,97 +28,95 @@ class _ShoppingCartTabState extends State<ShoppingCartTab> {
 
   // Currency formatter - used in calculations
   final _currencyFormat = numberFormatLib.NumberFormat.currency(symbol: '\$');
-  TextEditingController _controller = new TextEditingController();
-  FocusNode _focusNode = new FocusNode();
+
+  TextEditingController _controllerName = new TextEditingController();
+  FocusNode _focusNodeName = new FocusNode();
+
+  TextEditingController _controllerEmail = new TextEditingController();
+  FocusNode _focusNodeEmail = new FocusNode();
+
+  TextEditingController _controllerLocation = new TextEditingController();
+  FocusNode _focusNodeLocation = new FocusNode();
 
   Widget _buildCustomNameField() {
-    _onChangeText(value) => debugPrint("_onChangeText: $value");
-    _onSubmittedText(value) => debugPrint("_onSubmittedText: $value");
+    return Column(
+      children: <Widget>[
+        Row(
+          children: <Widget>[
 
-    return Platform.isIOS
-        ? Column(
-            children: [
-              Row(
-                children: [
-                  ExcludeSemantics(
-                    child: /*** ICON ***/
-                        const Icon(
-                      CupertinoIcons.person_solid,
-                      color: CupertinoColors.lightBackgroundGray,
-                      size: 28,
-                    ),
-                  ),
-                  Expanded(
-                      child: Semantics(
-                    child: NativeTextInput(
-                      controller: _controller,
-                      focusNode: _focusNode,
-                      keyboardType: KeyboardType.defaultType,
-                      textContentType: TextContentType.name,
-                      placeholder: 'Name',
-                      onChanged: (newName) {
-                        setState(() {
-                          name = newName;
-                        });
-                      },
-                    ), //_buildCustomNameField(),
-                  )),
-                  MergeSemantics(
-                    child: GestureDetector(
-                      onTap: () {
-                        _controller.clear();
-                      },
-                      child: Semantics(
-                        onTap: () {
-                          _controller.clear();
-                          //SemanticsService.announce("SearchBar cleared", TextDirection.ltr);
-                        },
-                        button: true,
-
-                        //onTapHint: "to clear the text.",
-                        child: const Icon(
-                          CupertinoIcons.clear_thick_circled,
-                          color: Styles.searchIconColor,
-                          semanticLabel: "Clear",
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
+            ExcludeSemantics(
+              child: /*** ICON ***/
+                  const Icon(
+                CupertinoIcons.person_solid,
+                color: CupertinoColors.lightBackgroundGray,
+                size: 28,
               ),
-              SizedBox(height: 6),
-              Container(
-                height: 1,
-                color: Styles.productRowDivider,
-              ),
-            ],
-          )
-
-        : CupertinoTextField(
-            prefix: const Icon(
-              CupertinoIcons.person_solid,
-              color: CupertinoColors.lightBackgroundGray,
-              size: 28,
             ),
-            padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 12),
-            clearButtonMode: OverlayVisibilityMode.editing,
-            textCapitalization: TextCapitalization.words,
-            autocorrect: false,
-            decoration: const BoxDecoration(
-              border: Border(
-                bottom: BorderSide(
-                  width: 0,
-                  color: CupertinoColors.inactiveGray,
+
+            Expanded(
+              child: Semantics(
+                child: Platform.isIOS
+
+                ? NativeTextInput(
+                    placeholder: 'Name',
+                    keyboardType: KeyboardType.defaultType,
+                    textContentType: TextContentType.name,
+                    controller: _controllerName,
+                    focusNode: _focusNodeName,
+                    onChanged: (newName) {
+                      setState(() {
+                        name = newName;
+                      });
+                    }
+                  )
+
+                : CupertinoTextField(
+                    placeholder: 'Name',
+                    keyboardType: TextInputType.name,
+                    textInputAction: TextInputAction.done,
+                    textCapitalization: TextCapitalization.words,
+                    autocorrect: false,
+                    decoration: BoxDecoration(border: null),
+                    controller: _controllerName,
+                    focusNode: _focusNodeName,
+                    onChanged: (newName) {
+                      setState(() {
+                        name = newName;
+                      });
+                    },
+                  ),
+
+              ),
+            ),
+
+            MergeSemantics(
+              child: GestureDetector(
+                onTap: () {
+                  _controllerName.clear();
+                  SemanticsService.announce(LanguageAdaptedStrings.clearButtonSemanticAnnouncement, TextDirection.ltr);
+                },
+                child: Semantics(
+                  button: true,
+                  onTapHint: LanguageAdaptedStrings.clearButtonHint, //"clear the text",
+
+                  child: Icon(
+                    CupertinoIcons.clear_thick_circled,
+                    color: Styles.searchIconColor,
+                    semanticLabel: LanguageAdaptedStrings.clearButtonLabel, //"Clear",
+                  ),
                 ),
               ),
             ),
-            placeholder: 'Name',
-            onChanged: (newName) {
-              setState(() {
-                name = newName;
-              });
-            },
-          );
+          ],
+        ),
+
+        SizedBox(height: 6),
+        Container(
+          height: 1,
+          color: Styles.productRowDivider,
+        ),
+      ],
+    );
   }
 
   Widget _buildNameField() {
@@ -150,6 +147,81 @@ class _ShoppingCartTabState extends State<ShoppingCartTab> {
     );
   }
 
+  Widget _buildCustomEmailField() {
+    return Column(
+      children: <Widget>[
+        Row(
+          children: <Widget>[
+
+            ExcludeSemantics(
+              child: /*** ICON ***/
+              const Icon(
+                CupertinoIcons.mail_solid,
+                color: CupertinoColors.lightBackgroundGray,
+                size: 28,
+              ),
+            ),
+
+            Expanded(
+              child: Semantics(
+                child: Platform.isIOS
+
+                ? NativeTextInput(
+                  placeholder: 'Email',
+                  keyboardType: KeyboardType.defaultType,
+                  textContentType: TextContentType.name,
+                  controller: _controllerEmail,
+                  focusNode: _focusNodeEmail,
+                  onChanged: (newEmail) {
+                    setState(() {
+                      email = newEmail;
+                    });
+                  }
+                )
+
+                : CupertinoTextField(
+                  placeholder: 'Email',
+                  keyboardType: TextInputType.emailAddress,
+                  textInputAction: TextInputAction.done,
+                  autocorrect: false,
+                  decoration: BoxDecoration(border: null),
+                  controller: _controllerEmail,
+                  focusNode: _focusNodeEmail,
+                ),
+
+              ),
+            ),
+
+            MergeSemantics(
+              child: GestureDetector(
+                onTap: () {
+                  _controllerEmail.clear();
+                  SemanticsService.announce(LanguageAdaptedStrings.clearButtonSemanticAnnouncement, TextDirection.ltr);
+                },
+                child: Semantics(
+                  button: true,
+                  onTapHint: LanguageAdaptedStrings.clearButtonHint, //"clear the text",
+
+                  child: Icon(
+                    CupertinoIcons.clear_thick_circled,
+                    color: Styles.searchIconColor,
+                    semanticLabel: LanguageAdaptedStrings.clearButtonLabel, //"Clear",
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+
+        SizedBox(height: 6),
+        Container(
+          height: 1,
+          color: Styles.productRowDivider,
+        ),
+      ],
+    );
+  }
+
   Widget _buildEmailField() {
     return const CupertinoTextField(
       prefix: Icon(
@@ -170,6 +242,81 @@ class _ShoppingCartTabState extends State<ShoppingCartTab> {
         ),
       ),
       placeholder: 'Email',
+    );
+  }
+
+  Widget _buildCustomLocationField() {
+    return Column(
+      children: <Widget>[
+        Row(
+          children: <Widget>[
+
+            ExcludeSemantics(
+              child: /*** ICON ***/
+              const Icon(
+                CupertinoIcons.location_solid,
+                color: CupertinoColors.lightBackgroundGray,
+                size: 28,
+              ),
+            ),
+
+            Expanded(
+              child: Semantics(
+                child: Platform.isIOS
+
+                    ? NativeTextInput(
+                    placeholder: 'Location',
+                    keyboardType: KeyboardType.defaultType,
+                    textContentType: TextContentType.location,
+                    controller: _controllerLocation,
+                    focusNode: _focusNodeLocation,
+                    onChanged: (newEmail) {
+                      setState(() {
+                        email = newEmail;
+                      });
+                    }
+                )
+
+                    : CupertinoTextField(
+                  placeholder: 'Location',
+                  keyboardType: TextInputType.streetAddress,
+                  textInputAction: TextInputAction.done,
+                  autocorrect: false,
+                  decoration: BoxDecoration(border: null),
+                  controller: _controllerLocation,
+                  focusNode: _focusNodeLocation,
+                ),
+
+              ),
+            ),
+
+            MergeSemantics(
+              child: GestureDetector(
+                onTap: () {
+                  _controllerLocation.clear();
+                  SemanticsService.announce(LanguageAdaptedStrings.clearButtonSemanticAnnouncement, TextDirection.ltr);
+                },
+                child: Semantics(
+                  button: true,
+                  onTapHint: LanguageAdaptedStrings.clearButtonHint, //"clear the text",
+
+                  child: Icon(
+                    CupertinoIcons.clear_thick_circled,
+                    color: Styles.searchIconColor,
+                    semanticLabel: LanguageAdaptedStrings.clearButtonLabel, //"Clear",
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+
+        SizedBox(height: 6),
+        Container(
+          height: 1,
+          color: Styles.productRowDivider,
+        ),
+      ],
     );
   }
 
@@ -249,7 +396,7 @@ class _ShoppingCartTabState extends State<ShoppingCartTab> {
       child: Semantics(
         // If there are more then 0 products inside the cart, read the semantic hint
         hint: model.totalCartQuantity > 0
-            ? LanguageAdaptedStrings.cartListHintSemantic
+            ? LanguageAdaptedStrings.cartListSemanticHint
             : null,
 
         child: Column(
@@ -295,12 +442,12 @@ class _ShoppingCartTabState extends State<ShoppingCartTab> {
         case 1:
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: _buildEmailField(),
+            child: _buildCustomEmailField(),
           );
         case 2:
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: _buildLocationField(),
+            child:  _buildCustomLocationField(),
           );
         case 3:
           return Padding(
