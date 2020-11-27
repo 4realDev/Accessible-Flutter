@@ -70,7 +70,7 @@ class SearchBar extends StatelessWidget {
             GestureDetector(
               onTap: () {
                 controller.clear();
-                SemanticsService.announce("Text cleared", TextDirection.ltr);
+                SemanticsService.announce(LanguageAdaptedStrings.clearButtonSemanticAnnouncement, TextDirection.ltr);
               },
               child: Semantics(
                 button: true,

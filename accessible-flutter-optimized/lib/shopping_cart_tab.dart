@@ -119,34 +119,6 @@ class _ShoppingCartTabState extends State<ShoppingCartTab> {
     );
   }
 
-  Widget _buildNameField() {
-    return CupertinoTextField(
-      prefix: const Icon(
-        CupertinoIcons.person_solid,
-        color: CupertinoColors.lightBackgroundGray,
-        size: 28,
-      ),
-      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 12),
-      clearButtonMode: OverlayVisibilityMode.editing,
-      textCapitalization: TextCapitalization.words,
-      autocorrect: false,
-      decoration: const BoxDecoration(
-        border: Border(
-          bottom: BorderSide(
-            width: 0,
-            color: CupertinoColors.inactiveGray,
-          ),
-        ),
-      ),
-      placeholder: 'Name',
-      onChanged: (newName) {
-        setState(() {
-          name = newName;
-        });
-      },
-    );
-  }
-
   Widget _buildCustomEmailField() {
     return Column(
       children: <Widget>[
@@ -219,29 +191,6 @@ class _ShoppingCartTabState extends State<ShoppingCartTab> {
           color: Styles.productRowDivider,
         ),
       ],
-    );
-  }
-
-  Widget _buildEmailField() {
-    return const CupertinoTextField(
-      prefix: Icon(
-        CupertinoIcons.mail_solid,
-        color: CupertinoColors.lightBackgroundGray,
-        size: 28,
-      ),
-      padding: EdgeInsets.symmetric(horizontal: 6, vertical: 12),
-      clearButtonMode: OverlayVisibilityMode.editing,
-      keyboardType: TextInputType.emailAddress,
-      autocorrect: false,
-      decoration: BoxDecoration(
-        border: Border(
-          bottom: BorderSide(
-            width: 0,
-            color: CupertinoColors.inactiveGray,
-          ),
-        ),
-      ),
-      placeholder: 'Email',
     );
   }
 
@@ -320,28 +269,6 @@ class _ShoppingCartTabState extends State<ShoppingCartTab> {
     );
   }
 
-  Widget _buildLocationField() {
-    return const CupertinoTextField(
-      prefix: Icon(
-        CupertinoIcons.location_solid,
-        color: CupertinoColors.lightBackgroundGray,
-        size: 28,
-      ),
-      padding: EdgeInsets.symmetric(horizontal: 6, vertical: 12),
-      clearButtonMode: OverlayVisibilityMode.editing,
-      textCapitalization: TextCapitalization.words,
-      decoration: BoxDecoration(
-        border: Border(
-          bottom: BorderSide(
-            width: 0,
-            color: CupertinoColors.inactiveGray,
-          ),
-        ),
-      ),
-      placeholder: 'Location',
-    );
-  }
-
   Widget _buildDateAndTimePicker(BuildContext context) {
     return Column(
       children: <Widget>[
@@ -350,7 +277,7 @@ class _ShoppingCartTabState extends State<ShoppingCartTab> {
           children: <Widget>[
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
-              children: const <Widget>[
+              children: <Widget>[
                 Icon(
                   CupertinoIcons.clock,
                   color: CupertinoColors.lightBackgroundGray,
@@ -358,7 +285,7 @@ class _ShoppingCartTabState extends State<ShoppingCartTab> {
                 ),
                 SizedBox(width: 6),
                 Text(
-                  'Delivery time',
+                  LanguageAdaptedStrings.deliveryTime,
                   style: Styles.deliveryTimeLabel,
                 ),
               ],

@@ -34,31 +34,12 @@ class ProductRowItem extends StatelessWidget {
         right: 8,
       ),
 
-      // Raw Screen-Reading: "Product name. Rroduct price. Add Button, double tap to activate."
-      // Step 1: Wrap whole item with the Semantics Widget
-
-      // Step 2: Create own logic for the onTap event and adjust the onTapHint to "Double tap to add to cart."
-      // Problem: Now we have two items, that can be tapped/pressed.
-      // Because of this the CupertinoButton is now seen as a separate Semantic Widget in the Semantic-Tree
-      // Screen-Reading: "Product name. Product price. Double tap to add to cart." SWIPE_LEFT "Add Button. Double tap to activate."
-      // Possible Solution: Wrap everything in a MergeSemantics Widget - Problem: the Semantic Meaning of the CupertinoButton will be still visible and readable for the screen-readers
-      // Screen-Reading: "Product name. Product price. ADD BUTTON. Double tap to add to cart."
-      // Solution: Step 3
-
-      // Step 3: Exclude the CupertinoButton from the Semantic tree
-      // Exclude the ClipRRect as well, because it has no semantic meaning
-      // To achieve this, wrap the CupertinoButton and the ClipRRect with the ExcludeSemantics Widget
-      // This achieves as well, that the onPressed() event can only be triggered when the screen-reader is disabled,
-      // and on the opposite the onTap() event can not be triggered when the screen-reader is enabled
-      // Screen-Reading: "Product name. Product price. Double tap to add to cart."
-
       child: MergeSemantics(
         child: Semantics(
-          /*
-          SemanticsService announcement is only necessary in the Semantic wrapper.
-          If the semantics wrapper is tapped, the announcement occurs and the user gets haptic feedback,
-          that symbolizes, that the item is successful added to the cart
-           */
+
+          // SemanticsService announcement is only necessary in the Semantic wrapper.
+          // If the semantics wrapper is tapped, the announcement occurs and the user gets haptic feedback,
+          // that symbolizes, that the item is successful added to the cart
 
           onTap: () {
             model.addProductToCart(product.id);

@@ -2,17 +2,24 @@ import 'dart:io';
 
 abstract class LanguageAdaptedStrings {
 
-  /*** PRODUCT TAB / PRODUCT ITEM ***/
-  static String productTabDescription;
-  static String productItemHint;
-  static String productAddSemanticAnnouncement;
-
   /*** TAB BAR ***/
   static String productTab;
   static String searchTab;
   static String cartTab;
 
+  /*** PRODUCT TAB / PRODUCT ITEM ***/
+  static String productTabDescription;
+  static String productItemHint;
+  static String productAddSemanticAnnouncement;
+
+  static String productCounterSemantic;
+
+  /*** SEARCH TAB / SEARCHFIELD ***/
+  static String searchField;
+  static String searchFieldHint;
+
   /*** CART TAB / CART ITEM ***/
+
   static String cartItemHint;
   static String cartItemRemoveSemanticAnnouncement;
 
@@ -20,16 +27,13 @@ abstract class LanguageAdaptedStrings {
   static String cartListCount;
   static String cartListSemanticHint;
 
-  static String productCounterSemantic;
-
   /*** TEXTFIELD ***/
   static String clearButtonLabel;
   static String clearButtonHint;
   static String clearButtonSemanticAnnouncement;
 
-  /*** SEARCHFIELD ***/
-  static String searchField;
-  static String searchFieldHint;
+  /*** DELIVERYTIME ***/
+  static String deliveryTime;
 
   static setLanguageAdaptedString() {
     final String systemLanguage = Platform.localeName; // Returns locale string in the form 'en_US' || 'de_DE';
@@ -42,7 +46,7 @@ abstract class LanguageAdaptedStrings {
         productAddSemanticAnnouncement = 'zum Warenkorb hinzugefügt.';
 
         cartItemHint = 'aus dem Warenkorb entfernen.';
-        cartItemRemoveSemanticAnnouncement = 'aus dem Warenkorn entfernt.';
+        cartItemRemoveSemanticAnnouncement = 'aus dem Warenkorb entfernt.';
         cartListHeading = 'Warenkorb Liste:';
         cartListCount = 'Produkte sind aktuell im Warenkorb.';
         cartListSemanticHint = 'Wischen Sie nach rechts um die Produkte anzuhören.';
@@ -58,6 +62,8 @@ abstract class LanguageAdaptedStrings {
         productTab = 'Produkte';
         searchTab = 'Suche';
         cartTab = 'Warenkorb';
+
+        deliveryTime = 'Lieferzeit: ';
       }
       break;
 
@@ -84,6 +90,8 @@ abstract class LanguageAdaptedStrings {
         productTab = 'Products';
         searchTab = 'Search';
         cartTab = 'Cart';
+
+        deliveryTime = 'Delivery time: ';
       }
       break;
     }
