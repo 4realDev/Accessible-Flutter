@@ -97,7 +97,8 @@ class _ShoppingCartTabState extends State<ShoppingCartTab> {
                 },
                 child: Semantics(
                   button: true,
-                  onTapHint: LanguageAdaptedStrings.clearButtonHint, //"clear the text",
+                  onTapHint: Platform.isIOS ? null : LanguageAdaptedStrings.clearButtonOnTapHint, // "onTapHind" DOES NOT WORK ON IOS
+                  hint: Platform.isIOS ? LanguageAdaptedStrings.clearButtonHint : null, // "hint" as WORKAROUND ONLY FOR IOS
 
                   child: Icon(
                     CupertinoIcons.clear_thick_circled,
@@ -172,7 +173,8 @@ class _ShoppingCartTabState extends State<ShoppingCartTab> {
                 },
                 child: Semantics(
                   button: true,
-                  onTapHint: LanguageAdaptedStrings.clearButtonHint, //"clear the text",
+                  onTapHint: Platform.isIOS ? null : LanguageAdaptedStrings.clearButtonOnTapHint, // "onTapHind" DOES NOT WORK ON IOS
+                  hint: Platform.isIOS ? LanguageAdaptedStrings.clearButtonHint : null, // "hint" as WORKAROUND ONLY FOR IOS
 
                   child: Icon(
                     CupertinoIcons.clear_thick_circled,
@@ -247,7 +249,8 @@ class _ShoppingCartTabState extends State<ShoppingCartTab> {
                 },
                 child: Semantics(
                   button: true,
-                  onTapHint: LanguageAdaptedStrings.clearButtonHint, //"clear the text",
+                  onTapHint: Platform.isIOS ? null : LanguageAdaptedStrings.clearButtonOnTapHint, // "onTapHind" DOES NOT WORK ON IOS
+                  hint: Platform.isIOS ? LanguageAdaptedStrings.clearButtonHint : null, // "hint" as WORKAROUND ONLY FOR IOS
 
                   child: Icon(
                     CupertinoIcons.clear_thick_circled,

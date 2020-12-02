@@ -37,13 +37,15 @@ class ProductRowItem extends StatelessWidget {
       child: MergeSemantics(
         child: Semantics(
 
-          // Semantic announcement DOES NOT WORK ON iOS
-          // SemanticsService announcement is only necessary in the Semantic wrapper.
-          // If the semantics wrapper is tapped, the announcement occurs and the user gets haptic feedback,
+          /***
+           * Semantic announcement DOES NOT WORK ON iOS
+           * This should be used for announcement that are not seamlessly announced by
+           * the system as a result of a UI state change.
+           */
 
-          // give user feedback that the item is successful added to the cart
           onTap: () {
             model.addProductToCart(product.id);
+            // give user feedback that the item is successful added to the cart
             SemanticsService.announce('${product.name} ${LanguageAdaptedStrings.productAddSemanticAnnouncement}', TextDirection.ltr);
           },
 
@@ -54,7 +56,7 @@ class ProductRowItem extends StatelessWidget {
            * in this example: "Double tap to ADD TO CART"
            */
 
-          onTapHint: Platform.isIOS ? null : LanguageAdaptedStrings.productItemHint/*"add to cart"*/,
+          onTapHint: Platform.isIOS ? null : LanguageAdaptedStrings.productItemOnTapHint/*"add to cart"*/,
 
           /***
            * "hint" as WORKAROUND ONLY FOR IOS
@@ -63,7 +65,7 @@ class ProductRowItem extends StatelessWidget {
            * Therefor the hint is only used on iOS devices and the onTapHint is used for Android devices
            */
 
-          hint: Platform.isIOS ? "Double tap to add to cart" : null,
+          hint: Platform.isIOS ? LanguageAdaptedStrings.productItemHint : null,
 
 
 

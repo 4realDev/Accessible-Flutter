@@ -9,7 +9,8 @@ abstract class LanguageAdaptedStrings {
 
   /*** PRODUCT TAB / PRODUCT ITEM ***/
   static String productTabDescription;
-  static String productItemHint;
+  static String productItemOnTapHint; // only works on Android
+  static String productItemHint;  // used for iOS
   static String productAddSemanticAnnouncement;
 
   static String productCounterSemantic;
@@ -20,6 +21,7 @@ abstract class LanguageAdaptedStrings {
 
   /*** CART TAB / CART ITEM ***/
 
+  static String cartItemOnTapHint;
   static String cartItemHint;
   static String cartItemRemoveSemanticAnnouncement;
 
@@ -29,6 +31,7 @@ abstract class LanguageAdaptedStrings {
 
   /*** TEXTFIELD ***/
   static String clearButtonLabel;
+  static String clearButtonOnTapHint;
   static String clearButtonHint;
   static String clearButtonSemanticAnnouncement;
 
@@ -40,12 +43,14 @@ abstract class LanguageAdaptedStrings {
 
     switch(systemLanguage) {
       case 'de_DE': {
-        // 'Zum x doppelt klicken' is given as Talkback default for Hints
+        // 'Zum x doppel tippen' is given as Talkback default for Hints
         productTabDescription = 'Willkommen im Cupertino Store. Bitte wählen Sie Ihre gewünschten Produkte aus und gehen Sie zum Warenkorb Tab, um diese zu bestellen.';
-        productItemHint = 'in den Warenkorb hinzufügen';
+        productItemOnTapHint = 'in den Warenkorb hinzufügen';
+        productItemHint = 'Zum in den Warenkorb hinzufügen doppel tippen.';
         productAddSemanticAnnouncement = 'zum Warenkorb hinzugefügt.';
 
-        cartItemHint = 'aus dem Warenkorb entfernen.';
+        cartItemOnTapHint = 'aus dem Warenkorb entfernen.';
+        cartItemHint = 'Zum aus dem Warenkorb entfernen doppel tippen.';
         cartItemRemoveSemanticAnnouncement = 'aus dem Warenkorb entfernt.';
         cartListHeading = 'Warenkorb Liste:';
         cartListCount = 'Produkte sind aktuell im Warenkorb.';
@@ -54,7 +59,8 @@ abstract class LanguageAdaptedStrings {
         productCounterSemantic = 'Mal zum Warenkorb hinzugefügt.';
 
         clearButtonLabel = 'Lösch';
-        clearButtonHint = 'Löschen des Textes';
+        clearButtonOnTapHint = 'Löschen des Textes';
+        clearButtonHint = 'Zum Löschen des Textes doppel tippen.';
         clearButtonSemanticAnnouncement = 'Text wurde gelöscht.';
 
         searchField = 'Suchleiste';
@@ -70,10 +76,12 @@ abstract class LanguageAdaptedStrings {
       // 'Double tap to x' is given as Talkback default for Hints
       default: {  // default represents the language English with 'en_Us'
         productTabDescription = 'Welcome to the Cupertino Store. Please select your desired products and go to the Cart Tab to order them.';
-        productItemHint = 'add to cart';
+        productItemOnTapHint = 'add to cart';
+        productItemHint = 'Double tap to add to cart.';
         productAddSemanticAnnouncement = 'added to cart.';
 
-        cartItemHint = 'remove from cart.';
+        cartItemOnTapHint = 'remove from cart.';
+        cartItemHint = 'Double tap to remove from cart.';
         cartItemRemoveSemanticAnnouncement = 'removed from cart.';
         cartListHeading = 'Shopping Cart List:';
         cartListCount = 'products currently added.';
@@ -82,7 +90,7 @@ abstract class LanguageAdaptedStrings {
         productCounterSemantic = 'times added to cart.';
 
         clearButtonLabel = 'Clear';
-        clearButtonHint = 'clear the text.';
+        clearButtonOnTapHint = 'clear the text.';
         clearButtonSemanticAnnouncement = 'Text cleared.';
 
         searchField = 'Search Field';

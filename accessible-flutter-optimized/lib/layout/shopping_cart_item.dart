@@ -47,13 +47,35 @@ class ShoppingCartItem extends StatelessWidget {
         child: MergeSemantics(
           child: Semantics(
 
+            /***
+             * Semantic announcement DOES NOT WORK ON iOS
+             * This should be used for announcement that are not seamlessly announced by
+             * the system as a result of a UI state change.
+             */
+
             onTap: () {
               model.removeItemFromCart(product.id);
+              // give user feedback that the item is successful added to the cart
               SemanticsService.announce('${product.name} ${LanguageAdaptedStrings.cartItemRemoveSemanticAnnouncement}', TextDirection.ltr);
             },
 
-            // onTapHint completes the "Double tap to" sentence with the given string
-            onTapHint: LanguageAdaptedStrings.cartItemHint /*"add to cart"*/,
+            /***
+             * "onTapHind" DOES NOT WORK ON IOS
+             * for iOS the "hint" is used
+             * onTapHint completes the "Double tap to" sentence with the given string
+             * in this example: "Double tap to REMOVE FROM CART"
+             */
+
+            onTapHint: Platform.isIOS ? null : LanguageAdaptedStrings.cartItemOnTapHint /*"remove from cart"*/,
+
+            /***
+             * "hint" as WORKAROUND ONLY FOR IOS
+             * on iOS only the hint is read by the screenreader
+             * on Android the hind is read with the additional sentence "Double tap to active"
+             * Therefor the hint is only used on iOS devices and the onTapHint is used for Android devices
+             */
+
+            hint: Platform.isIOS ? LanguageAdaptedStrings.cartItemHint : null,
 
             child: Row(
               children: <Widget>[
@@ -117,7 +139,7 @@ class ShoppingCartItem extends StatelessWidget {
                 /*** BUTTON ***/
                 ExcludeSemantics(
                   // If the current platform is not iOS, then exclude the button
-                  excluding: Platform.isIOS ? false : true,
+                  // excluding: Platform.isIOS ? false : true,
                   child: CupertinoButton(
                     padding: EdgeInsets.all(8.0),
                     onPressed: () {

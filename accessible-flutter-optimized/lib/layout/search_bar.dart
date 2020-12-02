@@ -74,7 +74,8 @@ class SearchBar extends StatelessWidget {
               },
               child: Semantics(
                 button: true,
-                onTapHint: LanguageAdaptedStrings.clearButtonHint, //"clear the text",
+                onTapHint: Platform.isIOS ? null : LanguageAdaptedStrings.clearButtonOnTapHint, // "onTapHind" DOES NOT WORK ON IOS
+                hint: Platform.isIOS ? LanguageAdaptedStrings.clearButtonHint : null, // "hint" as WORKAROUND ONLY FOR IOS
 
                 child: Icon(
                   CupertinoIcons.clear_thick_circled,
