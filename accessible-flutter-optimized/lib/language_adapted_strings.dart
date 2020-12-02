@@ -91,6 +91,7 @@ abstract class LanguageAdaptedStrings {
 
         clearButtonLabel = 'Clear';
         clearButtonOnTapHint = 'clear the text.';
+        clearButtonHint = 'Double tap to clear the text.';
         clearButtonSemanticAnnouncement = 'Text cleared.';
 
         searchField = 'Search Field';
