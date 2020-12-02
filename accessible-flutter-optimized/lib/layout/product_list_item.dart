@@ -37,17 +37,35 @@ class ProductRowItem extends StatelessWidget {
       child: MergeSemantics(
         child: Semantics(
 
+          // Semantic announcement DOES NOT WORK ON iOS
           // SemanticsService announcement is only necessary in the Semantic wrapper.
           // If the semantics wrapper is tapped, the announcement occurs and the user gets haptic feedback,
-          // that symbolizes, that the item is successful added to the cart
 
+          // give user feedback that the item is successful added to the cart
           onTap: () {
             model.addProductToCart(product.id);
             SemanticsService.announce('${product.name} ${LanguageAdaptedStrings.productAddSemanticAnnouncement}', TextDirection.ltr);
           },
 
-          // onTapHint completes the "Double tap to" sentence with the given string
-          onTapHint: LanguageAdaptedStrings.productItemHint/*"add to cart"*/,
+          /***
+           * "onTapHind" DOES NOT WORK ON IOS
+           * for iOS the "hint" is used
+           * onTapHint completes the "Double tap to" sentence with the given string
+           * in this example: "Double tap to ADD TO CART"
+           */
+
+          onTapHint: Platform.isIOS ? null : LanguageAdaptedStrings.productItemHint/*"add to cart"*/,
+
+          /***
+           * "hint" as WORKAROUND ONLY FOR IOS
+           * on iOS only the hint is read by the screenreader
+           * on Android the hind is read with the additional sentence "Double tap to active"
+           * Therefor the hint is only used on iOS devices and the onTapHint is used for Android devices
+           */
+
+          hint: Platform.isIOS ? "Double tap to add to cart" : null,
+
+
 
           child: Row(
             children: <Widget>[
@@ -99,7 +117,7 @@ class ProductRowItem extends StatelessWidget {
 
               /*** BUTTON ***/
               ExcludeSemantics(
-                excluding: Platform.isIOS ? false : true,
+                //excluding: Platform.isIOS ? false : true,
                 child: CupertinoButton(
                   padding: EdgeInsets.zero,
                   onPressed: () {
