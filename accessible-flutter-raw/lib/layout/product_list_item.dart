@@ -21,6 +21,7 @@ class ProductRowItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final model = Provider.of<AppStateModel>(context, listen: false);
     final row = SafeArea(
       top: false,
       bottom: false,
@@ -35,7 +36,6 @@ class ProductRowItem extends StatelessWidget {
         child: Semantics(
 
           onTap: (){
-            final model = Provider.of<AppStateModel>(context, listen: false);
             model.addProductToCart(product.id);
             SemanticsService.announce("${product.name} added to cart", TextDirection.ltr);
           },
@@ -77,10 +77,12 @@ class ProductRowItem extends StatelessWidget {
 
                       /*** PRODUCT PRICE ***/
                       const Padding(padding: EdgeInsets.only(top: 8)),
+
                       Text(
-                        '\$${product.price}',
+                        '${model.getProductCountById(product.id)} x \$${product.price}',
+                        semanticsLabel: '\$${product.price}, ${model.getProductCountById(product.id)} times added to cart.',
                         style: Styles.productRowItemPrice,
-                      )
+                      ),
 
                     ],
                   ),
@@ -92,7 +94,6 @@ class ProductRowItem extends StatelessWidget {
                 child: CupertinoButton(
                   padding: EdgeInsets.zero,
                   onPressed: () {
-                    final model = Provider.of<AppStateModel>(context, listen: false);
                     model.addProductToCart(product.id);
                   },
                   child: const Icon(
