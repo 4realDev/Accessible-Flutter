@@ -33,9 +33,10 @@ class ProductRowItem extends StatelessWidget {
       child: MergeSemantics(
         child: Semantics(
 
+          onTap: (){},
           onTapHint: Platform.isIOS ? null : "add to cart",
           hint: Platform.isIOS ? "Double tap to add to cart": null,
-          
+
           child: Row(
             children: <Widget>[
 
