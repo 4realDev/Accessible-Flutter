@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 
@@ -30,6 +32,10 @@ class ProductRowItem extends StatelessWidget {
 
       child: MergeSemantics(
         child: Semantics(
+
+          onTapHint: Platform.isIOS ? null : "add to cart",
+          hint: Platform.isIOS ? "Double tap to add to cart": null,
+          
           child: Row(
             children: <Widget>[
 
