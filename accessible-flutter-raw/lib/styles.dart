@@ -22,6 +22,12 @@ abstract class Styles {
     fontWeight: FontWeight.w300,
   );
 
+  static const TextStyle productTabDescription = TextStyle(
+    color: Color(0xFF8E8E93),
+    fontSize: 16,
+    fontWeight: FontWeight.w300,
+  );
+
   static const TextStyle searchText = TextStyle(
     color: Color.fromRGBO(0, 0, 0, 1),
     fontSize: 14,

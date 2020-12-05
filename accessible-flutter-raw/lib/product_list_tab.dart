@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
-
+import 'package:cupertino_store/styles.dart';
 import 'model/app_state_model.dart';
 import 'layout/product_list_item.dart';
 
@@ -16,6 +16,43 @@ class ProductListTab extends StatelessWidget {
             const CupertinoSliverNavigationBar(
               largeTitle: Text('Cupertino Store'),
             ),
+
+            /*** INTRO-TEXT ***/
+            SliverToBoxAdapter(
+              child: SafeArea(
+                top: false,
+                bottom: false,
+                minimum: const EdgeInsets.only(
+                  left: 16,
+                  top: 16,
+                  bottom: 32,
+                  right: 16,
+                ),
+                child: Text(
+                  'Welcome to the Cupertino Store. Please select your desired products and go to the Cart Tab to order them.',
+                  style: Styles.productTabDescription,
+                ),
+              ),
+            ),
+
+            /*** ROW-DIVIDER ***/
+            SliverToBoxAdapter(
+              child: Column(
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      left: 0,
+                      right: 0,
+                    ),
+                    child: Container(
+                      height: 1,
+                      color: Styles.productRowDivider,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
             SliverSafeArea(
               top: false,
               minimum: const EdgeInsets.only(top: 8),
