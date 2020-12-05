@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
 
 import '../model/app_state_model.dart';
@@ -33,7 +34,11 @@ class ProductRowItem extends StatelessWidget {
       child: MergeSemantics(
         child: Semantics(
 
-          onTap: (){},
+          onTap: (){
+            final model = Provider.of<AppStateModel>(context, listen: false);
+            model.addProductToCart(product.id);
+            SemanticsService.announce("${product.name} added to cart", TextDirection.ltr);
+          },
           onTapHint: Platform.isIOS ? null : "add to cart",
           hint: Platform.isIOS ? "Double tap to add to cart": null,
 
