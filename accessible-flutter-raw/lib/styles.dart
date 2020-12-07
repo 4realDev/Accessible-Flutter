@@ -9,6 +9,13 @@ abstract class Styles {
     fontWeight: FontWeight.normal,
   );
 
+  static const TextStyle cartProductRowItemName = TextStyle(
+    color: Color.fromRGBO(0, 0, 0, 0.8),
+    fontSize: 16,
+    fontStyle: FontStyle.normal,
+    fontWeight: FontWeight.normal,
+  );
+
   static const TextStyle productRowTotal = TextStyle(
     color: Color.fromRGBO(0, 0, 0, 0.8),
     fontSize: 18,
