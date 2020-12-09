@@ -38,6 +38,11 @@ abstract class LanguageAdaptedStrings {
   /*** DELIVERYTIME ***/
   static String deliveryTime;
 
+  /*** DISPLAY SHIPPING, TAX AND TOTAL ***/
+  static String cartTabShipping;
+  static String cartTabTax;
+  static String cartTabTotal;
+
   static setLanguageAdaptedString() {
     final String systemLanguage = Platform.localeName; // Returns locale string in the form 'en_US' || 'de_DE';
 
@@ -55,6 +60,10 @@ abstract class LanguageAdaptedStrings {
         cartListHeading = 'Warenkorb Liste:';
         cartListCount = 'Produkte sind aktuell im Warenkorb.';
         cartListSemanticHint = 'Wischen Sie nach rechts um die Produkte anzuhören.';
+
+        cartTabShipping = 'Versand';
+        cartTabTax = 'MwSt';
+        cartTabTotal = 'Gesamt';
 
         productCounterSemantic = 'Mal zum Warenkorb hinzugefügt.';
 
@@ -86,6 +95,10 @@ abstract class LanguageAdaptedStrings {
         cartListHeading = 'Shopping Cart List:';
         cartListCount = 'products currently added.';
         cartListSemanticHint = 'Swipe right to hear the products.';
+
+        cartTabShipping = 'Shipping';
+        cartTabTax = 'Tax';
+        cartTabTotal = 'Total';
 
         productCounterSemantic = 'times added to cart.';
 

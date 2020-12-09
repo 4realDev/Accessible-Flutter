@@ -422,22 +422,34 @@ class _ShoppingCartTabState extends State<ShoppingCartTab> {
 
                     /*** DISPLAY THREE TEXTES ***/
                     children: <Widget>[
+
                       const SizedBox(height: 24),
+
+                      /*** SHIPPING TEXT ***/
                       Text(
-                        'Shipping '
-                        '${_currencyFormat.format(model.shippingCost)}',
+                        LanguageAdaptedStrings.cartTabShipping + " " + _currencyFormat.format(model.shippingCost),
                         style: Styles.productRowItemPrice,
+                        semanticsLabel: LanguageAdaptedStrings.cartTabShipping + _currencyFormat.format(model.shippingCost) + ".",
                       ),
+
                       const SizedBox(height: 6),
+
+                      /*** TAX TEXT ***/
                       Text(
-                        'Tax ${_currencyFormat.format(model.tax)}',
+                        LanguageAdaptedStrings.cartTabTax + " " + _currencyFormat.format(model.tax),
                         style: Styles.productRowItemPrice,
+                        semanticsLabel: LanguageAdaptedStrings.cartTabTax + " " +_currencyFormat.format(model.tax) + ".",
                       ),
+
                       const SizedBox(height: 6),
+
+                      /*** TOTAL TEXT ***/
                       Text(
-                        'Total  ${_currencyFormat.format(model.totalCost)}',
+                        LanguageAdaptedStrings.cartTabTotal + " " + _currencyFormat.format(model.totalCost),
                         style: Styles.productRowTotal,
+                        semanticsLabel: LanguageAdaptedStrings.cartTabTotal + " " +_currencyFormat.format(model.totalCost) + ".",
                       ),
+
                       const SizedBox(height: 18),
                     ],
                   )
