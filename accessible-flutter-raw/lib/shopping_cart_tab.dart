@@ -140,11 +140,50 @@ class _ShoppingCartTabState extends State<ShoppingCartTab>{
     );
   }
 
+  Widget _buildCartDesciptionText(BuildContext context) {
+    final model = Provider.of<AppStateModel>(context, listen: false);
+    return SafeArea(
+      top: false,
+      bottom: false,
+      child: Semantics(
+        // If there are more then 0 products inside the cart, read the semantic hint
+        hint: model.totalCartQuantity > 0
+            ? 'Swipe right to hear the products.'
+            : null,
+
+        child: Column(
+          children: <Widget>[
+            /*** ROW-DIVIDER ***/
+            Container(
+              height: 1,
+              color: Styles.productRowDivider,
+            ),
+            SizedBox(height: 32),
+
+            /*** SHOPPING CART LIST SUBHEADING ***/
+            Text(
+              'Shopping Cart List:',
+              style: Styles.productRowTotal,
+            ),
+            SizedBox(height: 6),
+
+            /*** TOTAL PRODUCT COUNT IN CART DESCRIPTION ***/
+            Text(
+              '${model.totalCartQuantity} products currently added.',
+              style: Styles.productTabDescription,
+              // semanticsLabel: model.totalCartQuantity > 0 ? '${model.totalCartQuantity} products currently added. Swipe right to hear the products.' : null,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   SliverChildBuilderDelegate _buildSliverChildBuilderDelegate(AppStateModel model) {
     return SliverChildBuilderDelegate((context, index) {
 
       // to count the shopping_cart_items beginning with 0 (currently default is 4)
-      final productIndex = index - 4;
+      final productIndex = index - 5;
       switch (index) {
         case 0:
           return Padding(
@@ -165,6 +204,11 @@ class _ShoppingCartTabState extends State<ShoppingCartTab>{
           return Padding(
             padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
             child: _buildDateAndTimePicker(context),
+          );
+        case 4:
+          return Padding(
+            padding: const EdgeInsets.fromLTRB(0, 0, 0, 24),
+            child: _buildCartDesciptionText(context),
           );
 
         default:
@@ -199,23 +243,25 @@ class _ShoppingCartTabState extends State<ShoppingCartTab>{
                     /*** DISPLAY THREE TEXTES ***/
                     children: <Widget>[
                       Text(
-                        'Shipping '
-                            '${_currencyFormat.format(model.shippingCost)}',
+                        'Shipping ${_currencyFormat.format(model.shippingCost)}',
                         style: Styles.productRowItemPrice,
+                        semanticsLabel: 'Shipping ' + _currencyFormat.format(model.shippingCost) + '.',
                       ),
                       const SizedBox(height: 6),
 
                       Text(
                         'Tax ${_currencyFormat.format(model.tax)}',
                         style: Styles.productRowItemPrice,
+                        semanticsLabel: 'Tax ' + _currencyFormat.format(model.tax) + '.',
                       ),
                       const SizedBox(height: 6),
 
                       Text(
                         'Total  ${_currencyFormat.format(model.totalCost)}',
                         style: Styles.productRowTotal,
+                        semanticsLabel: 'Total ' + _currencyFormat.format(model.totalCost) + '.',
                       ),
-
+                      const SizedBox(height: 18),
                     ],
                   )
                 ],
