@@ -42,31 +42,32 @@ class SearchBar extends StatelessWidget {
             ),
 
             Expanded(
-              child: Semantics(
-                label: LanguageAdaptedStrings.searchField, //"SearchField",
+              child: MergeSemantics(
+                child: Semantics(
+                  label: LanguageAdaptedStrings.searchField, //"SearchField",
 
-                child: Platform.isIOS
+                  child: Platform.isIOS
 
-                  ? NativeTextInput(
-                      keyboardType: KeyboardType.defaultType,
-                      textContentType: TextContentType.name,
+                    ? NativeTextInput(
+                        keyboardType: KeyboardType.defaultType,
+                        textContentType: TextContentType.name,
+                        controller: controller,
+                        focusNode: focusNode,
+                      )
+
+                    : CupertinoTextField(
                       controller: controller,
                       focusNode: focusNode,
-                    )
+                      textInputAction: TextInputAction.search,
+                      textCapitalization: TextCapitalization.words,
+                      autocorrect: false,
+                      decoration: BoxDecoration(border: null),
+                      style: Styles.searchText,
+                      cursorColor: Styles.searchCursorColor,
+                    ),
 
-                  : CupertinoTextField(
-                    controller: controller,
-                    focusNode: focusNode,
-                    textInputAction: TextInputAction.search,
-                    textCapitalization: TextCapitalization.words,
-                    autocorrect: false,
-                    decoration: BoxDecoration(border: null),
-                    style: Styles.searchText,
-                    cursorColor: Styles.searchCursorColor,
-                  ),
-
+                ),
               ),
-
             ),
 
             MergeSemantics(
