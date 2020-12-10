@@ -85,21 +85,25 @@ class _ShoppingCartTabState extends State<ShoppingCartTab> {
                       });
                     },
                   ),
-
               ),
             ),
 
             MergeSemantics(
-              child: GestureDetector(
+              child: Semantics(
                 onTap: () {
                   _controllerName.clear();
                   SemanticsService.announce(LanguageAdaptedStrings.clearButtonSemanticAnnouncement, TextDirection.ltr);
                 },
-                child: Semantics(
-                  button: true,
-                  onTapHint: Platform.isIOS ? null : LanguageAdaptedStrings.clearButtonOnTapHint, // "onTapHind" DOES NOT WORK ON IOS
-                  hint: Platform.isIOS ? LanguageAdaptedStrings.clearButtonHint : null, // "hint" as WORKAROUND ONLY FOR IOS
 
+                button: true,
+                onTapHint: Platform.isIOS ? null : LanguageAdaptedStrings.clearButtonOnTapHint, // "onTapHind" DOES NOT WORK ON IOS
+                hint: Platform.isIOS ? LanguageAdaptedStrings.clearButtonHint : null, // "hint" as WORKAROUND ONLY FOR IOS
+
+                child: CupertinoButton(
+                  onPressed: () {
+                    _controllerName.clear();
+                  },
+                  padding: EdgeInsets.all(8),
                   child: Icon(
                     CupertinoIcons.clear_thick_circled,
                     color: Styles.searchIconColor,
@@ -108,10 +112,10 @@ class _ShoppingCartTabState extends State<ShoppingCartTab> {
                 ),
               ),
             ),
+
           ],
         ),
 
-        SizedBox(height: 6),
         Container(
           height: 1,
           color: Styles.productRowDivider,
@@ -166,16 +170,21 @@ class _ShoppingCartTabState extends State<ShoppingCartTab> {
             ),
 
             MergeSemantics(
-              child: GestureDetector(
+              child: Semantics(
                 onTap: () {
                   _controllerEmail.clear();
                   SemanticsService.announce(LanguageAdaptedStrings.clearButtonSemanticAnnouncement, TextDirection.ltr);
                 },
-                child: Semantics(
-                  button: true,
-                  onTapHint: Platform.isIOS ? null : LanguageAdaptedStrings.clearButtonOnTapHint, // "onTapHind" DOES NOT WORK ON IOS
-                  hint: Platform.isIOS ? LanguageAdaptedStrings.clearButtonHint : null, // "hint" as WORKAROUND ONLY FOR IOS
 
+                button: true,
+                onTapHint: Platform.isIOS ? null : LanguageAdaptedStrings.clearButtonOnTapHint, // "onTapHind" DOES NOT WORK ON IOS
+                hint: Platform.isIOS ? LanguageAdaptedStrings.clearButtonHint : null, // "hint" as WORKAROUND ONLY FOR IOS
+
+                child: CupertinoButton(
+                  onPressed: () {
+                    _controllerEmail.clear();
+                  },
+                  padding: EdgeInsets.all(8),
                   child: Icon(
                     CupertinoIcons.clear_thick_circled,
                     color: Styles.searchIconColor,
@@ -187,7 +196,6 @@ class _ShoppingCartTabState extends State<ShoppingCartTab> {
           ],
         ),
 
-        SizedBox(height: 6),
         Container(
           height: 1,
           color: Styles.productRowDivider,
@@ -242,16 +250,21 @@ class _ShoppingCartTabState extends State<ShoppingCartTab> {
             ),
 
             MergeSemantics(
-              child: GestureDetector(
+              child: Semantics(
                 onTap: () {
                   _controllerLocation.clear();
                   SemanticsService.announce(LanguageAdaptedStrings.clearButtonSemanticAnnouncement, TextDirection.ltr);
                 },
-                child: Semantics(
-                  button: true,
-                  onTapHint: Platform.isIOS ? null : LanguageAdaptedStrings.clearButtonOnTapHint, // "onTapHind" DOES NOT WORK ON IOS
-                  hint: Platform.isIOS ? LanguageAdaptedStrings.clearButtonHint : null, // "hint" as WORKAROUND ONLY FOR IOS
 
+                button: true,
+                onTapHint: Platform.isIOS ? null : LanguageAdaptedStrings.clearButtonOnTapHint, // "onTapHind" DOES NOT WORK ON IOS
+                hint: Platform.isIOS ? LanguageAdaptedStrings.clearButtonHint : null, // "hint" as WORKAROUND ONLY FOR IOS
+
+                child: CupertinoButton(
+                  onPressed: () {
+                    _controllerLocation.clear();
+                  },
+                  padding: EdgeInsets.all(8),
                   child: Icon(
                     CupertinoIcons.clear_thick_circled,
                     color: Styles.searchIconColor,
@@ -263,7 +276,6 @@ class _ShoppingCartTabState extends State<ShoppingCartTab> {
           ],
         ),
 
-        SizedBox(height: 6),
         Container(
           height: 1,
           color: Styles.productRowDivider,

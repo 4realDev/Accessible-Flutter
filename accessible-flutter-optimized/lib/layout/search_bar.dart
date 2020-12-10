@@ -34,9 +34,11 @@ class SearchBar extends StatelessWidget {
         child: Row(
 
           children: [
-            const Icon(
-              CupertinoIcons.search,
-              color: Styles.searchIconColor,
+            ExcludeSemantics(
+              child: const Icon(
+                CupertinoIcons.search,
+                color: Styles.searchIconColor,
+              ),
             ),
 
             Expanded(
@@ -67,24 +69,30 @@ class SearchBar extends StatelessWidget {
 
             ),
 
-            GestureDetector(
-              onTap: () {
-                controller.clear();
-                SemanticsService.announce(LanguageAdaptedStrings.clearButtonSemanticAnnouncement, TextDirection.ltr);
-              },
+            MergeSemantics(
               child: Semantics(
+                onTap: () {
+                  controller.clear();
+                  SemanticsService.announce(LanguageAdaptedStrings.clearButtonSemanticAnnouncement, TextDirection.ltr);
+                },
+
                 button: true,
                 onTapHint: Platform.isIOS ? null : LanguageAdaptedStrings.clearButtonOnTapHint, // "onTapHind" DOES NOT WORK ON IOS
                 hint: Platform.isIOS ? LanguageAdaptedStrings.clearButtonHint : null, // "hint" as WORKAROUND ONLY FOR IOS
 
-                child: Icon(
-                  CupertinoIcons.clear_thick_circled,
-                  color: Styles.searchIconColor,
-                  semanticLabel: LanguageAdaptedStrings.clearButtonLabel, //"Clear",
+                child: CupertinoButton(
+                  onPressed: () {
+                    controller.clear();
+                  },
+                  padding: EdgeInsets.all(8),
+                  child: Icon(
+                    CupertinoIcons.clear_thick_circled,
+                    color: Styles.searchIconColor,
+                    semanticLabel: LanguageAdaptedStrings.clearButtonLabel, //"Clear",
+                  ),
                 ),
               ),
             ),
-
           ],
         ),
       ),
