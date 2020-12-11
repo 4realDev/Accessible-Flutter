@@ -17,7 +17,6 @@ abstract class LanguageAdaptedStrings {
 
   /*** SEARCH TAB / SEARCHFIELD ***/
   static String searchField;
-  static String searchFieldHint;
 
   /*** CART TAB / CART ITEM ***/
 
@@ -72,7 +71,7 @@ abstract class LanguageAdaptedStrings {
         clearButtonHint = 'Zum Löschen des Textes doppel tippen.';
         clearButtonSemanticAnnouncement = 'Text wurde gelöscht.';
 
-        searchField = 'Suchleiste';
+        searchField = 'Suche';
 
         productTab = 'Produkte';
         searchTab = 'Suche';
@@ -107,7 +106,7 @@ abstract class LanguageAdaptedStrings {
         clearButtonHint = 'Double tap to clear the text.';
         clearButtonSemanticAnnouncement = 'Text cleared.';
 
-        searchField = 'Search Field';
+        searchField = 'Search';
 
         productTab = 'Products';
         searchTab = 'Search';

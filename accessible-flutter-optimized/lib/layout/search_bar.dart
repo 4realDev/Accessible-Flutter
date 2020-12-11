@@ -29,7 +29,7 @@ class SearchBar extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(
           horizontal: 4,
-          vertical: 8,
+          vertical: 0,
         ),
         child: Row(
 
@@ -42,31 +42,29 @@ class SearchBar extends StatelessWidget {
             ),
 
             Expanded(
-              child: MergeSemantics(
-                child: Semantics(
-                  label: LanguageAdaptedStrings.searchField, //"SearchField",
+              child: Semantics(
+                child: Platform.isIOS
 
-                  child: Platform.isIOS
-
-                    ? NativeTextInput(
-                        keyboardType: KeyboardType.defaultType,
-                        textContentType: TextContentType.name,
-                        controller: controller,
-                        focusNode: focusNode,
-                      )
-
-                    : CupertinoTextField(
+                  ? NativeTextInput(
+                      placeholder: 'Search',
+                      keyboardType: KeyboardType.defaultType,
+                      textContentType: TextContentType.name,
                       controller: controller,
                       focusNode: focusNode,
-                      textInputAction: TextInputAction.search,
-                      textCapitalization: TextCapitalization.words,
-                      autocorrect: false,
-                      decoration: BoxDecoration(border: null),
-                      style: Styles.searchText,
-                      cursorColor: Styles.searchCursorColor,
-                    ),
+                    )
 
-                ),
+                  : CupertinoTextField(
+                    placeholder: 'Search',
+                    controller: controller,
+                    focusNode: focusNode,
+                    textInputAction: TextInputAction.search,
+                    textCapitalization: TextCapitalization.words,
+                    autocorrect: false,
+                    decoration: BoxDecoration(border: null),
+                    style: Styles.searchText,
+                    cursorColor: Styles.searchCursorColor,
+                  ),
+
               ),
             ),
 
