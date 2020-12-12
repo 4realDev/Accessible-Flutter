@@ -46,7 +46,7 @@ class SearchBar extends StatelessWidget {
                 child: Platform.isIOS
 
                   ? NativeTextInput(
-                      placeholder: 'Search',
+                      placeholder: LanguageAdaptedStrings.searchField,
                       keyboardType: KeyboardType.defaultType,
                       textContentType: TextContentType.name,
                       controller: controller,
@@ -54,7 +54,7 @@ class SearchBar extends StatelessWidget {
                     )
 
                   : CupertinoTextField(
-                    placeholder: 'Search',
+                    placeholder: LanguageAdaptedStrings.searchField,
                     controller: controller,
                     focusNode: focusNode,
                     textInputAction: TextInputAction.search,
