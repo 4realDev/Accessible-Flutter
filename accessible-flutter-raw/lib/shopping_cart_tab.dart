@@ -199,8 +199,7 @@ class _ShoppingCartTabState extends State<ShoppingCartTab>{
                     /*** DISPLAY THREE TEXTES ***/
                     children: <Widget>[
                       Text(
-                        'Shipping '
-                            '${_currencyFormat.format(model.shippingCost)}',
+                        'Shipping ${_currencyFormat.format(model.shippingCost)}',
                         style: Styles.productRowItemPrice,
                       ),
                       const SizedBox(height: 6),
