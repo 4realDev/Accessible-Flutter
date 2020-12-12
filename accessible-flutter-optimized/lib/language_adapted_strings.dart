@@ -19,9 +19,15 @@ abstract class LanguageAdaptedStrings {
   static String searchField;
 
   /*** CART TAB / CART ITEM ***/
+  static String cartTabHeading;
+
+  static String cartInputFieldName;
+  static String cartInputFieldEmail;
+  static String cartInputFieldLocation;
 
   static String cartItemOnTapHint;
   static String cartItemHint;
+  static String cartItemRemoveLabel;
   static String cartItemRemoveSemanticAnnouncement;
 
   static String cartListHeading;
@@ -53,8 +59,15 @@ abstract class LanguageAdaptedStrings {
         productItemHint = 'Zum in den Warenkorb hinzufügen doppel tippen.';
         productAddSemanticAnnouncement = 'zum Warenkorb hinzugefügt.';
 
+        cartTabHeading = 'Warenkorb';
+
+        cartInputFieldName = 'Name';
+        cartInputFieldEmail = 'Email';
+        cartInputFieldLocation = 'Ort';
+
         cartItemOnTapHint = 'aus dem Warenkorb entfernen.';
         cartItemHint = 'Zum aus dem Warenkorb entfernen doppel tippen.';
+        cartItemRemoveLabel = 'Entfernen';
         cartItemRemoveSemanticAnnouncement = 'aus dem Warenkorb entfernt.';
         cartListHeading = 'Warenkorb Liste:';
         cartListCount = 'Produkte sind aktuell im Warenkorb.';
@@ -88,8 +101,15 @@ abstract class LanguageAdaptedStrings {
         productItemHint = 'Double tap to add to cart.';
         productAddSemanticAnnouncement = 'added to cart.';
 
+        cartTabHeading = 'Shopping Cart';
+
+        cartInputFieldName = 'Name';
+        cartInputFieldEmail = 'Email';
+        cartInputFieldLocation = 'Location';
+
         cartItemOnTapHint = 'remove from cart.';
         cartItemHint = 'Double tap to remove from cart.';
+        cartItemRemoveLabel = 'Remove';
         cartItemRemoveSemanticAnnouncement = 'removed from cart.';
         cartListHeading = 'Shopping Cart List:';
         cartListCount = 'products currently added.';

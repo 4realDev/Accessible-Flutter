@@ -58,7 +58,7 @@ class _ShoppingCartTabState extends State<ShoppingCartTab> {
                 child: Platform.isIOS
 
                 ? NativeTextInput(
-                    placeholder: 'Name',
+                    placeholder: LanguageAdaptedStrings.cartInputFieldName,
                     keyboardType: KeyboardType.defaultType,
                     textContentType: TextContentType.name,
                     controller: _controllerName,
@@ -71,7 +71,7 @@ class _ShoppingCartTabState extends State<ShoppingCartTab> {
                   )
 
                 : CupertinoTextField(
-                    placeholder: 'Name',
+                    placeholder: LanguageAdaptedStrings.cartInputFieldName,
                     keyboardType: TextInputType.name,
                     textInputAction: TextInputAction.done,
                     textCapitalization: TextCapitalization.words,
@@ -144,7 +144,7 @@ class _ShoppingCartTabState extends State<ShoppingCartTab> {
                 child: Platform.isIOS
 
                 ? NativeTextInput(
-                  placeholder: 'Email',
+                  placeholder: LanguageAdaptedStrings.cartInputFieldEmail,
                   keyboardType: KeyboardType.defaultType,
                   textContentType: TextContentType.name,
                   controller: _controllerEmail,
@@ -157,7 +157,7 @@ class _ShoppingCartTabState extends State<ShoppingCartTab> {
                 )
 
                 : CupertinoTextField(
-                  placeholder: 'Email',
+                  placeholder: LanguageAdaptedStrings.cartInputFieldEmail,
                   keyboardType: TextInputType.emailAddress,
                   textInputAction: TextInputAction.done,
                   autocorrect: false,
@@ -224,7 +224,7 @@ class _ShoppingCartTabState extends State<ShoppingCartTab> {
                 child: Platform.isIOS
 
                     ? NativeTextInput(
-                    placeholder: 'Location',
+                    placeholder: LanguageAdaptedStrings.cartInputFieldLocation,
                     keyboardType: KeyboardType.defaultType,
                     textContentType: TextContentType.location,
                     controller: _controllerLocation,
@@ -237,7 +237,7 @@ class _ShoppingCartTabState extends State<ShoppingCartTab> {
                 )
 
                     : CupertinoTextField(
-                  placeholder: 'Location',
+                  placeholder: LanguageAdaptedStrings.cartInputFieldLocation,
                   keyboardType: TextInputType.streetAddress,
                   textInputAction: TextInputAction.done,
                   autocorrect: false,
@@ -480,8 +480,8 @@ class _ShoppingCartTabState extends State<ShoppingCartTab> {
       builder: (context, model, child) {
         return CustomScrollView(
           slivers: <Widget>[
-            const CupertinoSliverNavigationBar(
-              largeTitle: Text('Shopping Cart'),
+            CupertinoSliverNavigationBar(
+              largeTitle: Text(LanguageAdaptedStrings.cartTabHeading),
             ),
             SliverSafeArea(
               top: false,

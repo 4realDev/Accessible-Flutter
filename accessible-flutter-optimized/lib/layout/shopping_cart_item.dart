@@ -148,9 +148,9 @@ class ShoppingCartItem extends StatelessWidget {
                     },
 
                     /*** ICON ***/
-                    child: const Icon(
+                    child: Icon(
                       CupertinoIcons.minus_circled,
-                      semanticLabel: 'Remove',
+                      semanticLabel: LanguageAdaptedStrings.cartItemRemoveLabel,
                     ),
                   ),
                 ),
