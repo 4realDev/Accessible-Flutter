@@ -441,7 +441,7 @@ class _ShoppingCartTabState extends State<ShoppingCartTab> {
                       Text(
                         LanguageAdaptedStrings.cartTabShipping + " " + _currencyFormat.format(model.shippingCost),
                         style: Styles.productRowItemPrice,
-                        semanticsLabel: LanguageAdaptedStrings.cartTabShipping + _currencyFormat.format(model.shippingCost) + ".",
+                        semanticsLabel: LanguageAdaptedStrings.cartTabShipping + " " + _currencyFormat.format(model.shippingCost) + ".",
                       ),
 
                       const SizedBox(height: 6),
