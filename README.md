@@ -1,12 +1,15 @@
 # Code
 This app showcases an example and approach to improving screen reader accessibility for native Android and iOS apps, built with Flutter and Dart. In addition to this app, a paper on “Verifying screen reader accessibility of apps developed using Google Flutter” was written in collaboration with ZHAW Professor Alireza Darvishy.
 
+## Preview Video
+https://youtu.be/8B4pT6R9rCY
+
 # Paper: Verifying screen reader accessibility of apps developed using Google Flutter
 
 Vladimir, Brazhnik  
-OST – University of Applied Sciences of Eastern Switzerland, vladimir.brazhnik@ost.ch, +41 784 221 463  
+OST – University of Applied Sciences of Eastern Switzerland
 Alireza, Darvishy  
-ZHAW Zurich University of Applied Sciences, alireza.darvishy@zhaw.ch, +41 58 934 69 12
+ZHAW Zurich University of Applied Sciences
 
 ## ABSTRACT
 This paper presents the results of a study to verify whether the Google UI framework Flutter can create accessible apps for iOS and Android platforms simultaneously. Flutter provides mechanisms such as semantic classes to optimise accessibility during app development. Optimising accessibility for mobile apps and especially for screen readers is a major challenge for many app developers. One key reason for this is that optimisations should ideally always be made for both Apple and Android. A possible solution is offered by the UI framework Flutter, which aims to enable development in only one codebase. This means that accessibility optimisations made in the Flutter codebase should take effect in both Apple and Android platforms simultaneously as well as with their respective screen readers, so that users are provided with a consistent and accessible user experience, regardless of the platform chosen. The purpose of this study was to test this hypothesis. To this end, a sample app was developed using Flutter and a usability test was conducted with six visually impaired screen reader users. Based on the initial test results, the app was then optimised in terms of accessibility using Flutter's semantics classes, and then tested and evaluated again with the same test group. The results showed that some user interface elements were still not accessible. In order to overcome these accessibility issues, workarounds such as writing additional code for each specific platform were implemented, before a final usability test showed that the sample app was fully accessible.
