@@ -1,8 +1,11 @@
 # Verifying screen reader accessibility of apps developed using Google Flutter
 
 Vladimir, Brazhnik
+
 OST – University of Applied Sciences of Eastern Switzerland, vladimir.brazhnik@ost.ch, +41 784 221 463
+
 Alireza, Darvishy
+
 ZHAW Zurich University of Applied Sciences, alireza.darvishy@zhaw.ch, +41 58 934 69 12
 
 ## ABSTRACT
