@@ -1,4 +1,8 @@
-# Verifying screen reader accessibility of apps developed using Google Flutter
+# Code
+This app showcases an example and approach to improving screen reader accessibility for native Android and iOS apps, built with Flutter and Dart.  
+In addition to this app, a paper on “Verifying screen reader accessibility of apps developed using Google Flutter” was written in collaboration with ZHAW Professor Alireza Darvishy.
+
+# Paper: Verifying screen reader accessibility of apps developed using Google Flutter
 
 Vladimir, Brazhnik  
 OST – University of Applied Sciences of Eastern Switzerland, vladimir.brazhnik@ost.ch, +41 784 221 463  
