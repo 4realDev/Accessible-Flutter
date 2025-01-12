@@ -73,29 +73,16 @@ In particular, optimisations of critical elements that did not function properly
 In summary, it was found that Flutter offers developers several possibilities to simultaneously optimise the app for both platforms in terms of screen reader accessibility. One of the most important possibilities is the semantics class. Using this, simple but effective optimisations, such as the exclusion of purely decorative elements or the addition of labels, reading pauses or alternative texts, could be implemented quickly and easily. For more complex optimisations, such as overwriting hints or defining individual feedbacks for interactive UI elements, it was observed that the two platforms and their respective screen readers interpreted the codebase differently. Complex workarounds were necessary to deal with these differences. Among other things, each platform had to be queried in the Flutter codebase individually in order to fix the respective app behaviour with separate code snippets. It also turned out that basic UI elements, such as the Flutter TextFields, are interpreted differently by the two screen readers and do not offer essential basic functionalities that are crucial for screen reader accessibility. In this respect, it is up to the developers of Flutter to add these functionalities in the future. To conclude, on the one hand, the sample app could be partially optimised using only one codebase, which eliminates the need for two development teams for iOS and Android and saves on budget and resources. But on the other hand, several complex workarounds and platform-specific adaptations were necessary to achieve full accessibility. Thus, if the goal is to generate an accessible app using Flutter for both platforms without much effort, this is not possible at the time this study was conducted.
  
 ## REFERENCES
-[1]	Haishan Fu, Louise Cord, and Charlotte McClain-Nhlapo, A billion people experience disabilities worldwide — so where’s the data? [Online]. Available: https://blogs.worldbank.org/opendata/billion-people-experience-disabilities-worldwide-so-wheres-data (accessed: Mar. 8 2021).
-
-[2]	D. Pascolini and S. P. Mariotti, “Global estimates of visual impairment: 2010,” The British journal of ophthalmology, vol. 96, no. 5, pp. 614–618, 2012, doi: 10.1136/bjophthalmol-2011-300539.
-
-[3]	WebAIM, WebAIM: Screen Reader User Survey #7 Results. [Online]. Available: https://webaim.org/projects/screenreadersurvey7/ (accessed: Mar. 8 2021).
-
-[4]	Flutter, Dart API - widgets library - Semantics class. [Online]. Available: https://api.flutter.dev/flutter/widgets/Semantics-class.html (accessed: Mar. 8 2021).
-
-[5]	Shams Zakhour and Brett Morgan, Building a Cupertino app with Flutter (accessed: Mar. 8 2021).
-
-[6]	Flutter, Dart API - semantics library - SemanticsHintOverrides class. [Online]. Available: https://api.flutter.dev/flutter/semantics/SemanticsHintOverrides-class.html (accessed: Mar. 31 2021).
-
-[7]	Flutter, Dart API - semantics library - SemanticsConfiguration class - hint property. [Online]. Available: https://api.flutter.dev/flutter/semantics/SemanticsConfiguration/hint.html?web=1&wdLOR=c84BF2E97-DD26-4195-BA0A-BF1E64848AE6 (accessed: Mar. 31 2021).
-
-[8]	Flutter, Dart API - semantics library - SemanticsService class. [Online]. Available: https://api.flutter.dev/flutter/semantics/SemanticsService-class.html?web=1&wdLOR=cD7EF0364-486D-4819-B5E6-EE4B38C388F5 (accessed: Mar. 31 2021).
-
-[9]	Henry Leung, Mathieu D'Amours, and Fedor Kolinko, Flutter Package - flutter_native_text_input. [Online]. Available: https://pub.dev/packages/flutter_native_text_input (accessed: Mar. 31 2021).
-
-[10]	Flutter, Dart API - widgets library - ExcludeSemantics class. [Online]. Available: https://api.flutter.dev/flutter/widgets/ExcludeSemantics-class.html (accessed: Mar. 31 2021).
-
-[11]	Flutter, Dart API - widgets library - Text class - semanticsLabel property. [Online]. Available: https://api.flutter.dev/flutter/widgets/Text/semanticsLabel.html (accessed: Mar. 31 2021).
-
-[12]	Android Developers, Android Accessibility Guidelines - Make apps more accessible. [Online]. Available: https://developer.android.com/guide/topics/ui/accessibility/apps (accessed: Mar. 31 2021).
-
+[1]	Haishan Fu, Louise Cord, and Charlotte McClain-Nhlapo, A billion people experience disabilities worldwide — so where’s the data? [Online]. Available: https://blogs.worldbank.org/opendata/billion-people-experience-disabilities-worldwide-so-wheres-data (accessed: Mar. 8 2021).  
+[2]	D. Pascolini and S. P. Mariotti, “Global estimates of visual impairment: 2010,” The British journal of ophthalmology, vol. 96, no. 5, pp. 614–618, 2012, doi: 10.1136/bjophthalmol-2011-300539.  
+[3]	WebAIM, WebAIM: Screen Reader User Survey #7 Results. [Online]. Available: https://webaim.org/projects/screenreadersurvey7/ (accessed: Mar. 8 2021).  
+[4]	Flutter, Dart API - widgets library - Semantics class. [Online]. Available: https://api.flutter.dev/flutter/widgets/Semantics-class.html (accessed: Mar. 8 2021).  
+[5]	Shams Zakhour and Brett Morgan, Building a Cupertino app with Flutter (accessed: Mar. 8 2021).  
+[6]	Flutter, Dart API - semantics library - SemanticsHintOverrides class. [Online]. Available: https://api.flutter.dev/flutter/semantics/SemanticsHintOverrides-class.html (accessed: Mar. 31 2021).  
+[7]	Flutter, Dart API - semantics library - SemanticsConfiguration class - hint property. [Online]. Available: https://api.flutter.dev/flutter/semantics/SemanticsConfiguration/hint.html?web=1&wdLOR=c84BF2E97-DD26-4195-BA0A-BF1E64848AE6 (accessed: Mar. 31 2021).  
+[8]	Flutter, Dart API - semantics library - SemanticsService class. [Online]. Available: https://api.flutter.dev/flutter/semantics/SemanticsService-class.html?web=1&wdLOR=cD7EF0364-486D-4819-B5E6-EE4B38C388F5 (accessed: Mar. 31 2021).  
+[9]	Henry Leung, Mathieu D'Amours, and Fedor Kolinko, Flutter Package - flutter_native_text_input. [Online]. Available: https://pub.dev/packages/flutter_native_text_input (accessed: Mar. 31 2021).  
+[10]	Flutter, Dart API - widgets library - ExcludeSemantics class. [Online]. Available: https://api.flutter.dev/flutter/widgets/ExcludeSemantics-class.html (accessed: Mar. 31 2021).  
+[11]	Flutter, Dart API - widgets library - Text class - semanticsLabel property. [Online]. Available: https://api.flutter.dev/flutter/widgets/Text/semanticsLabel.html (accessed: Mar. 31 2021).  
+[12]	Android Developers, Android Accessibility Guidelines - Make apps more accessible. [Online]. Available: https://developer.android.com/guide/topics/ui/accessibility/apps (accessed: Mar. 31 2021).  
 [13]	Apple Developer, Human Interface Guidelines - Accessibility. [Online]. Available: https://developer.apple.com/design/human-interface-guidelines/accessibility/overview/introduction/ (accessed: Mar. 31 2021).
-
